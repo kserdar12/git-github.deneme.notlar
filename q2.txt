@@ -1,0 +1,56 @@
+Github da kodlarımızı takım halinde hata almadan çalışabilmek adına dipnotlar ....
+1)Öncelikle ij de framework u açtığımızda ilk olarak terminal a gidip
+git checkout main
+git branch (main a gectigimzi kontrol amacli yapilabilir)
+git pull
+(git pull dedigimizde hata alıyorsak eger bizim kendi branch mizde guncel yazdigimiz kodlari githuba yuklememisiz demektir) o yuzden once;
+git checkout branchismimiz
+git branch (kendi branch mize gectigimzi kontrol amacli yapilabilir)
+git add .
+git commit -m "mesajim"
+git push (simdi artik master branch e gecebilirim)
+git checkout master
+git branch (master a gectigimzi kontrol amacli yapilabilir)
+git pull
+2)Mainden githubdaki güncel kodlari aldık ve artik kendi branch e gidip maindaki kodlari kendi branch e çekmeliyim
+git checkout branchismimiz
+git branch (kendi branch mize gectigimzi kontrol amacli yapilabilir)
+git merge master
+3)Branch mizde kodlari birlestirdik artik framework mizde kodlarimizi yazabiliriz
+4)Kodlarimizi yazdiktan sonra githuba gondermek icin
+git add .
+git commit -m "mesajim"
+git push (kodlarimizi gonderip gondermedigimzi anlamak amacli git status diyip kontrol edebiliriz)
+           githubdan kodlari cekmek icin tekrar bastaki adimlari takip ederiz bu dongu bu sekilde devam eder ...
+NOT: Kodlari github dan cekmek icin main da, kod yazacaksak kendi branch mizde oldugumuzdan emin olalim .. .
+NOT: Kodlarimizi yazdiktan sonra komutlara gecmeden once save all yaptigimizdan emin olalım ..
+
+
+
+
+
+
+
+Yani sirkülasyon her inteliji actigimizda 
+
+git checkout main -> remote main e gec
+
+git branch -> main branch de olduğundan emin ol 
+
+git fetch -> githubdaki kodlari locale alir ama kodlari birlestirmez
+
+git merge-> githubdaki codlari bilgisayarimizdaki(localdeki)  kodlarla birlestirir
+
+git pull  -> kodlari yerel main e  al (yukardaki 2 adim yerine sadece bu adimda olur)
+
+git checkout Mehmet -> Zeynep branchine gec
+
+git merge main  -> localdeki main ile kodlari birlestir
+
+git branch -> kendi branch indesin emin ol 
+
+git add . -> kendi localde yazdiklarini ekle 
+
+git commit -m " Zeynep "    -> bunu versiyon olarak kaydet
+
+git push -> her seferinde yazdiklarını yeni versiyonlari remote Zeynep e yolla 
