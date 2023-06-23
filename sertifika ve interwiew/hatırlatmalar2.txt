@@ -1,0 +1,353 @@
+drop down oluştururken select tag kullanılır. tester ise select classı oluşturup testini yapar öncelikle.select tagı ile birlikte multiple attiribute var ise birden fazla secim yapabiliyoruz demektir
+option taglerini unutmayalım
+1.drop down elementi locate edilmelidir.    WebElement ddm=driver.findElement(By.id("value of id"));
+2.select classı kullanarak select objesi oluşturmaliyız Select options=new Select(ddm)
+3-select clasından kullanacağımız 3 yöntem ile eleman seçebiliyor olacağız 
+     options.selectByIndex(1);//arraylerdeki gibi 0 dan başlar dikkat et
+     options.selectByValue("0");string kabul eder 
+      options.selectByVisibleTest("Tuesday"); text yazı ne ise onu kabul eder		
+
+1a   WebElement year= driver.findElement(By.xpath("//select[@id='year']"));
+2a 
+
+
+//// test yapmadan önce kesinlikle oluştur/////////////////////////
+
+    @Before
+    public void setup(){
+        WebDriverManager.chromedriver().setup();
+        driver=new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+    }
+
+1 webmanager seçilmeli
+2web driver tanımlanmalı
+**proje için selennium java ,jdk,webmanager yüklenmeli ,j unit yüklenmeli framework için bunlar hazılanmalı
+//////////////////////////////////////////////////////
+
+isSelected()=>> true yada false return eder bunu radio box larda kullanabiliriz ama drop downda kullanamıyoruz
+bunun yerine getFirstSelectedOption() methodunu kullanırız.
+/*
+    1-What is the dropdown;
+    1-dropdown liste oluşturmak için kullanılır
+    2-how to handle dropdown elements? drop naslış automate edilir.
+    2-  -dropdown objesi oluştururum
+        -select objesi oluşturulur
+        -select objesi ile istediğim seçenegini seçerim
+    3-tum dropdown seçeneklerini nasıl print ederiz.
+      -tum dropdown elementlerini ****getOptions()*** ile listeye koyarız
+      -sonra seçenekleri loop ile yazdırabiliriz
+    4-bir seçeneğin secenegin secili olup olmadığını otomate etmek için ne yapılmalıdır.
+        örneğin:10 sectik
+        ***getFirstSelectedOption()*** methodu kullanılır.
+     */
+
+**dropdown.findelements(By.tagName("a")); tüm linkleri return eder
+**dropdown.findelements(By.tagName("option")); tüm optionları return eder
+///////////////selectFromDropdown method//////////////////
+
+    public void selectFromDropdown(WebElement dropdown, String secenek){
+
+        //selectFromDropdown(driver.findElement(By.xpath("//select[@id='year']")),"2005");
+        //selectFromDropdown(driver.findElement(By.xpath("//select[@id='month']")),"January");
+        //selectFromDropdown(driver.findElement(By.xpath("//select[@id='day']")),"12");
+
+        //gönderilen dropdownun tüm optinonarı alınır
+
+  public void selectFromDropdown(WebElement dropdown, String secenek){
+       List<WebElement> options= dropdown.findElements(By.tagName("option"));
+
+        for (WebElement eachOption:options) {
+            if (eachOption.getText().equals(secenek)){
+                eachOption.click();
+                break;
+            }
+
+        }
+///////////////selectFromDropdown method//////////////////
+
+/*
+utilities:
+----TestBase-->before ve after methodlarını buraya koyarız->reusable methodlar konabilir.->raporlar olabilir>extend yapacağız ve testbase abstract olacak obje oluşturulmayacak.
+---Driver
+---ExcelUtil
+---Configuration
+burda test case yazılmaz sadece support classlardır.
+///////***************//////
+1 jsAlert()
+2 jsConfirm()
+3 jsPrompt()
+
+==>java script  ile yazılir.inspect yapılamaz devam edilemez okey  veya cancel handle etmeliyiz
+1 acceptAlert
+2 dismissAlert
+3 sendKeysAlert
+
+**driver.switchTo().alert().accept()  allertu böyle handle ederiz
+alertun üstunde yaptığım her işlem için tekrardan swicthTo() methodunu kullanmalıyım
+****iFrame tag--------handle
+**sayfanın içine gömülü sayfa.nested page.alerteki gibi swicthTo olacak önce gireceğiz sonra çıkmalıyız.swicthto parentFrame-defaultContent harita ve çubuk görduğünde dikkat et
+
+***bazi siteler selenium la girdimizi anlar caphe koyar otomate edemeyiz.,
+**dokuman video map gibi şeyleri iframe ile siteye gömülür
+**driver.swirchTO().frame (id,name)
+		            (index)
+		           (webelementLocate) veya css.selector
+**iframeden çıkmak için driver.switchTo.parerntFrame
+	   	        dreiver.swicthTo.defaultContent  developerlar çok kullanılmaz sayfayi yavaşlatır.
+
+*******bir sayfadaki toplam iframe sayısi nedir	
+ıframeler iframe tagi kullanarak oluşturulur.bu durumda find elements byframe locatelerini kullanarak tüm iframeleri bulurum.list olarak alır sayarım		
+        driver.findElements(By.tagName("iframe));
+       driver.findElements(By.xpath("//iframe));
+******tekrar anasayfaya nasıl dönerim
+**2 farklı yol var
+1 defaultContent veya parentFrame methodlarını kullanarak geçiş yapabiliriz.ilkiyle en üst(ana sayfaya) digeri bir üst iframe çıkarır.
+******bir test case in fail etme sebepleri neler olabilir?
+
+1_Yanlış locator.çözüm :tekrar elementi locate etmek.degişken element var ise ona göre dynamic bir xpath yazarız.
+2_Wait/Syncronization / bekleme problemi 1_çözüm. implicit wait de yeterli sure oldugundan emin oluruz.30 saniye. 2_Explicit wait kullanılabilir.
+3_Iframe   çözüm : switchTo iframe
+4_Alert çözüm: swithTo alert
+5_New window çözüm : switch to window
+
+
+/////////window handle o pencereye ait hascode du demektir/////// her bir pencerenin unique id ehliyet tc gibi . bir fonksiyon
+1_içinde bulunduğumuz sayfanın window handle değerini alma
+     driver.getWindowHandle();  **bunu string olarak verir
+
+***driver.getWindowsHandles(); ilk sayfadayken açık olan tüm pencerelerin handleslarını()hascodelarını verir Set<String> return eder. loop koyup sonrakine eşitse geç diyeceğiz
+pop up reklamlar bazen çıkar bazen çıkmaya bilir.try cath yapılırsa  çözülür.fresh yapılabilir.
+
+
+public static void switchToWindow(String targetTitle){
+        String origin= driver.getWindowHandle();
+
+    for (String Handle: driver.getWindowHandles()) {
+        driver.switchTo().window(Handle);
+        if (driver.getTitle().equals(targetTitle)){
+            return;//dur gir oraya methodun dışına çık istediğim sayfaya girsen looptan çık break ifin dışına çık anlamı taşır
+        }
+
+    }
+    driver.switchTo().window(origin);
+}
+	
+       
+public static void switchToWindow2(int windowNumber){
+        List<String> list=new ArrayList<>(driver.getWindowHandles());
+
+        driver.switchTo().window(list.get(windowNumber));
+}
+
+/////////////yeni pencereler açmak için//////
+   driver.switchTo().newWindow(WindowType.WINDOW);//yeni window açtık ve oraya geçtik
+     driver.switchTo().window(techproHandle);//var olan pencereye geçmek için
+
+///WebDriverManager.chromedriver().setup();
+      driver=new ChromeDriver();
+yerine  driver=WebDriverManager.chromedriver().create;***
+
+authentication doğrulama kimlik doğulam verification gibi.güvenlikle alakalı.doğrulama sistemi.kullanıcı adı şifre istenmesi gibi.
+
+https://username:password@URL  bu bir ornek çok yaygın değildir. alertte çok benzde ama değil.alerte tek kutu ve ok veya cancel olur.
+
+******coookies*******
+ziyaret ettiğimiz sayfaların oluştuduğu dosyalar bilgiler veya bilgilerimizi depolar,site davranışlarımızı izler ileri de bu konuda bize onerilerde bulunur.
+sayfalarda geçici depolanır.cookiler bir kısmı görünür bir kismi görünmez.şifre yöneticisi.kişesel bilgiler de depolanır.sözleşmeleri kabul edince olan şeyler.
+**driver.manage(). methodu ile otomate yapabilirim selenium ile.
+driver.manage().addCookies()
+	getCookies()      Set<Cookie>
+	deleteCookies()
+	getCookieName() Cookie
+	deleteCookieName()		
+
+****************ACTİONS CLASS********************
+SELENİUMDA BİR KÜTÜPHANE
+mause ve keybord based action scroll
+click and hold
+ - drag and drop
+- move over element 
+-moveToelement ->>>mause u istediğimiz elementin üzerinde tutar elementin açılmasını bekleye biliriz
+contextClick->>> sag tıkla
+-scroll
+double click
+moveOver
+--kordinatlarla tıklama yapılabilir.boş yer gibi
+tab -shift-ctrl -alt
+robot class gibi
+
+1 Action actions=new Actions(driver)->driver vermez isek compile hatası verir
+2 Webelement element=driver.find element(locator);
+3 action.click(element).perform();
+
+action ve perform değişmez sabit.
+**1  aynı sınıf içinde bir sadece bir kez action class (yani tek obje yeterli) oluşturmak yeterlidir.
+**çalıştırmak için perform() yazmak şart yazmaz isek yine çalışır.yani kod fail vermez ama istediğimizi alamayız.
+**hard wait veya expilicite wait kullanacaksak obje oluşturmak önemlidir.
+
+page down
+page up
+arrow_down
+arrow_up
+Arrow vs page : arrow move less than page*****
+**actions objesi ile sroll yapılabiliyor fakat istediğimiz kadar hareket ettiremiyoruz js ile bu işlem daha foksiyoneldir.
+ dragAndDrop(Webelement source,WebElement Target)
+ actions.sendKeys(Keys.PAGE_DOWN).sendKeys(Keys.PAGE_DOWN).perform();
+        actions.sendKeys(Keys.ARROW_DOWN);//PAGE DOWN BİRAZ DAHA FAZLA İNDİRİR
+
+        actions.sendKeys(Keys.PAGE_UP).perform();
+        actions.sendKeys(Keys.ARROW_RIGHT).sendKeys(Keys.PAGE_DOWN).perform()
+
+perform()--yap uygula
+build()--birden fazla işlem yapıyorsak methodları fonksiyonları birbiriyle bağlantılarını kur ilişkisini güçlendir.
+actions.clickAndHold(source).moveToElement(target).release().build().perform();
+
+*****keyboard base actions*********
+sendKeys()
+keyDown() press to buton
+keyUp()     quit the buton
+
+****actions ta page down up,ve klavye de ve scrollde sendKeys() methodu kullanıyoruz unuttmaa
+
+//searchBox.sendKeys("iPhone X fiyatları", Keys.ENTER); böylede olur. virgül yerine + konabiliyor 
+//actions.click(searchBox).sendKeys("iPhone X fiyatları",Keys.ENTER).perform();
+
+1 Actions nedir-Actions class nedir.
+1 *Action selenium dan gelen bir kütüphanedir. action ayni zamanda mouse ve keyboard islemlerini yapacagımız bir kutuphanedir. double click ,moveToElement, contextClick
+**shift ,delete,enter,control tuslarina basabiliriz.bu tür islemelerde sendKeys() methodu kullanilir.
+2 Ne tur methodlar kullandın
+**Action methodlari önemlidir.tekrar tekrar kullanmam gerektiginden reuseable methodlar olusturdum örnegin;
+rightClick() methodu gibi
+
+********java faker class*******mock data
+*faker ları kullanmak için java faker kütüphanesi yüklemek lazimdir**** faker dependency pom a ekle maven reporstoryden alıyoruz
+
+Faker faker=new Faker();
+faker.name().first(); gibi // her seferinde farklı bir isim verir. meslek isimleri title diye geciyor.adres sehir isimleri.mail.
+
+      String username=faker.name().username();
+        System.out.println(username);
+        System.out.println(faker.address().city());
+        System.out.println(faker.address().fullAddress());
+        System.out.println(faker.phoneNumber().cellPhone());
+        System.out.println(faker.internet().emailAddress());
+        // 15 haneli numara
+        System.out.println(faker.number().digits(15));
+
+///e-where does test data come from. datalar nerden gelir gelmez
+*nerden gelir
+1-BA-Business analyst (acceptance criteria ları yazar)
+2-Test lead
+3-manual tester
+4- tec lead -team lead-dev lead
+5-developer
+6-database 
+7-APİ caller den 
+8-documatasyonlar dan gelebilir --apı swagger documantion
+9-java faker dan gelebilir
+**nerden gelmez
+1-scrum master (okul müdürü) takımları kontrol eder
+2-stack-holder
+3-user dan gelmez
+
+***********files------------****************
+**bilgisayardaki file ların varlığını seleniumla test edemeyiz fakat java ile yapabiliriz.
+1.dosyanın varlığı
+2.dosyayı indirme  işlemi    waitfor() kullanırız hard wait .masa üstümüzün bir parçası oluyor expilicite wait kullanamıyoruz.
+selenium masa üstündeki verileri test edemez bu yüzde  javayı kullanıyoruz
+**apload choose file sonra açılan ekran masa üstü ekranı olduğundan selenium buraya müdehale edemez **ekstra plugin eklemek lazım( outoİD VEY ROBOT CLASS)
+******** <input........type="file"...> arayüz oluşturur eğer <input........type="checkbox"...> olsay dı checkbox oluşurdu <input........type="radio"...> , <input........type="text"...> text kutusu oluşurdu
+ <input........type="submit"...> ----html de input type bize arayüz oluşturru
+*******input olduğu için ***sendKeys() ile yazı yazabilirim ama biz dosya yolunu yazacağız  
+
+3-dosyayı load yükleme işlemi bu yaygın
+
+*** String dosyaYolu=userHome+"/Desktop/logo.jpeg";
+*** String userDIR=System.getProperty("user.dir");
+*** boolean isExist=Files.exists(Paths.get(dosyaYolu));
+/**************************************************************************dosya upload
+ WebElement chooseFileButton=driver.findElement(By.id("file-upload"));
+  //yüklemek istediğimiz dosyayı seçelim
+          /*
+        chooseFileButton a yüklemek istediğim dosyanın path ini göndererek dosyayı seçtim
+         */
+        String path=System.getProperty("user.home")+ "/Desktop/logo.jpeg";
+        chooseFileButton.sendKeys(path);
+        waitFor(5);
+ //upload butonuna basalim
+        driver.findElement(By.id("file-submit")).click();
+      //  çıkan yazısıyı dogrula
+        String uploadedYazisi=driver.findElement(By.xpath("//h3")).getText();
+        Assert.assertEquals("File Uploaded!",uploadedYazisi);
+        waitFor(5);
+-----------------------------------------------------------------------------------------------------------
+Synchronization -selenium Waits zaman uyumu
+*****driver objesi ile web sitenin uyumlu bir şekilde çalışması demektir.bir birini görmesi
+*internet
+çok fazla iframe video yüklenmişse.driver 0.4 saniye bekler bulamaz ise test fail verir.no such exception alırız veya timeOut exception verir
+**Thread.sleep(mills:2000) hard wait 20 saniyenin hepsini bekler java dan gelir
+**implicitlyWait(Duration.ofSeconds(20)) //enfazla 20 saniye bekler elementi 5 saniyede bulursa işleme devam eder durmaz(max 20)gerektiğinde seleniumdan gelir.
+before bir kere yazdık mı yeterli oluyor.Global çalışır.driver. dersek hemen çalışır
+***explicitlyWait=> belirli ogelerin bulunması için kullanılan yerel selenium waitir.implicitly wait çalışmaz ise bunu kullanırız
+
+*ilk Olarak WebDriverWait wait=new WebDriverWait(driver,DurationOfSeconds(20))
+
+                               Webelement element= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(""))
+                                  sssssssssssssssssssssssssabit.değişken
+*******explicit wait hem elemanı bekler hem return eder -------********
+---Eger bir eleman html kodu ile saklanmış ise selenium o elemanı bulamaz örn styl="display:none" gibi
+
+Wait in Selenium
+1 implicity wait
+2 explicitly wait
+a.WebDriverWait
+   WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(20));
+       WebElement helloWorldElement= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='finish']//h4")));
+        String helloWorldText= helloWorldElement.getText();
+        Assert.assertEquals("Hello World!",helloWorldText);
+
+**bir classta sadece bir WebDriverWait objesi yeterlidir
+
+b.FluentWait (3) olarakta biliniyor
+   driver.get("https://the-internet.herokuapp.com/dynamic_loading/1");
+        //start tıkla
+        driver.findElement(By.xpath("//div[@id='start']//button")).click();
+
+        //1. Flueobje oluşturalım
+        Wait<WebDriver> wait=new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(30))//maximum bekleme süresi
+                .pollingEvery(Duration.ofSeconds(3))//deneme aralıklari
+                .withMessage("IGNORE EXCEPTİON")//mesaj yazdirabilirim
+                .ignoring(NoSuchMethodException.class);//try catch ayni
+
+ //wait objesini kullanarak bekleme problemini çöz
+       WebElement element= wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='finish']//h4")));
+        String helloWorldText=element.getText();
+        Assert.assertEquals("Hello World!",helloWorldText);
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+ctrlalt v tüm importlar////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

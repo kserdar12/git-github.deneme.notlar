@@ -1,0 +1,258 @@
+Kfsmaye.3400 mail
+753951sf.m chatCPT
+Sf12mert zoomPhotoFeeler.com
+
+https://chat.whatsapp.com/LfXXwvJHB7eJ9tHOxu4oOi
+**voscreen
+**youenglish
+**bygash
+
+sS123? deneme sayfası
+
+git config username
+ git branch -M main   
+ git remote add origin https://github.com/kserdar12/pgAdmin_SQL_Lessons.git //localdeki git i reporstorye bağlama
+ git push -u origin main 
+
+string data tipini integer a çevirme
+
+https://www.languagereactor.com/ 15 gün ücretsiz kullanılabiliyoruz
+
+not 1-UI TESTİ ÖNYÜZ TESTİ
+        2-BACKED TESTİ DATA BASE TESTİ
+        3-API TESTİ
+**testNG =>
+**Junit=>ikisindede alfabetik test yapar testNG de priorty ile testlerin çalışmasına sıralama verebiliyoruz.
+log4j searche veya proje seviyesinde oluştururabiliriz proje seviyesinde configuration.initialize(null,"log4j.xml") yapmamız lazım
+**istediğimiz bir methodu page gı çalıştırmak için xml file kullanırdık testNG de istediğimiz test page cı ve classı çalıştırmak için xml file oluştururuz.
+control alt L javada kodları düzenlemek için kullanılır
+
+---softAsset instance olduğu için obje oluşturuz.static değil.
+
+//Bu bir örnektir
+@FindBy(xpath = "//*[text()='OK']")//-> Linklerin listesinin locati
+public List<WebElement> listler;
+//Normalde Webelementleri locate için findelements kullanıyorduk
+//TestNG de page class'ında bunun kullanımı yukarıdaki örnekteki gibidir   
+
+İNHERİTENCE
+A)extends yaparak miras
+***bir variable statik ise kullandığımız method statik olmak zorunda
+***bir method statik ise variable ın statik olmasına gerek yok statik gökteki ay gibi
+***bir classı diger bir classın child ı yaparak ordaki methodları ve variabları kullana biliyoruz. TestCase extends yaptığımız gibi
+B)OBJE oluşturarak 
+***Bir classtan OBJE oluşturak istediğimiz zaman o classa ulaşabiliriz ve içindekileri kullanabiliriz. default olarak bir constructor mevcuttur
+***
+C)Static Class uyeri
+***eğer kullanacağanız variable veya method static ise OBJECT oluşturmadan direk class ismi ile variable veya methoda ulaşabiliyoruz.
+
+****Static blok içinde olan kısım classtaki herşeyden önce çalışır
+
+PostgreSQL,
+MySQL
+ORACLE DATABASE
+Microsoft SQLServer
+
+nullpointerException değişken  oluşturduk ama atama yapmazsak veya iki ve daha fazla eşitleme yaparsak ortaya çıkar
+
+https://chatbot.theb.ai/#/chat/1002
+BAICHAT
+
+handle capctcha ben robot değilim dogrulama harfleri yapamıyor
+performasn testi yapamıyor selenyum
+
+frame work bir düzen demek eczane örneği bir düzen oluşturacağız kümelatif ilerleyecek
+driver.manage().timeouts.implicitWait(10, TimeUnit.seconds )
+Burada 10 saniye ifadesi ile objenin 10 saniye içerisinde gelmesini bekleyecektir, eğer hala web sayfasında objeyi bulamazsa bir hata mesajı atacaktır, ancak obje yakalanır ise de teste başarılı şekilde devam edecektir.
+teste başlamadan önce
+1-maximize
+2-implicitly wait yapmaliyız.
+
+junit sayesinde mainden kurtulduk.assertion before after methodları ile karşı karşıyayız
+
+//www.edabit.com
+
+day15 Arrayslerde kaldın devam et UNUTMAAAA
+"//*[text()='14 results for']"));
+"(//*[@class='sg-col-inner'])[1]"
+action classlar ve tab classlar
+
+https://github.com/erlevren/SeleniumAutomationExercises/tree/master/src/test/java/AutomationExercises
+https://automationexercise.com/ TEST YAPABİLİRİM
+--linkler <a> tag ile belirtiriz.html
+
+dropDown locate et ve bir liste at yazdır...
+
+
+1.) Bir class oluşturun : Locators_css
+2.) Main method oluşturun ve aşağıdaki görevi tamamlayın.
+a. Verilen web sayfasına gidin. http://a.testaddressbook.com/
+sign_in
+b.Locate email textbox
+c. Locate password textbox ve
+d.Locate signin button
+e. Asagidaki kullanıcı adını ve şifreyi girin ve sign in düğmesini
+tıklayın
+i. Username : testtechproed@gmail.com
+ii.Password : Test1234!
+NOT: cssSelector kullanarak elementleri locate ediniz
+1-C01_TekrarTesti isimli bir class olusturun
+2- https://www.amazon.com/ adresine gidin
+3- Browseri tam sayfa yapin
+4.- Sayfayi “refresh” yapin
+5. Sayfa basliginin “Spend less” ifadesi icerdigini test edin
+6. Gift Cards sekmesine basin
+7. Birthday butonuna basin
+8. Best Seller bolumunden ilk urunu tiklayin
+9. Gift card details’den 25 $’i secin
+10-Urun ucretinin 25$ oldugunu test edin
+10-Sayfayi kapati
+1.“https://www.saucedemo.com” Adresine gidin
+2.Username kutusuna “standard_user” yazdirin
+3.Password kutusuna “secret_sauce” yazdirin
+4.Login tusuna basin
+5.Ilk urunun ismini kaydedin ve bu urunun sayfasina gidin
+6.Add to Cart butonuna basin
+7.Alisveris sepetine tiklayin
+8.Sectiginiz urunun basarili olarak sepete eklendigini control edin
+9.Sayfayi kapatin
+-https://www.facebook.com adresine gidin
+-Cookies’i kabul edin
+-“Create an Account” button’una basin
+-“radio buttons” elementlerini locate edin
+-Secili degilse cinsiyet butonundan size uygun olani secin
+1)https://www.youtube.com adresine gidin
+2)Aşağıdaki adları kullanarak 3 test metodu oluşturun ve gerekli testleri yapin
+=> Sayfa başlığının “YouTube” oldugunu test edin
+=> YouTube resminin görüntülendiğini (isDisplayed()) test edin
+○Search Box 'in erisilebilir oldugunu test edin (isEnabled())
+○wrongTitleTest => Sayfa basliginin “youtube” olmadigini dogrulayin
+1.Bir Class olusturalim YanlisEmailTesti
+2.http://automationpractice.com/index.php sayfasina gidelim
+3.Sign in butonuna basalim
+4.Email kutusuna @isareti olmayan bir mail yazip enter’a
+bastigimizda “Invalid email address” uyarisi ciktigini test edelim
+
+
+etkin()
+isEnabled (), web öğesinin web sayfası içinde etkinleştirilip etkinleştirilmediğini doğrulamak için kullanılan yöntemdir. 
+İsDisplayed () yöntemi gibi, her başarı ve başarısızlıkla bir Boolean değeriyle sonuçlanacak şekilde tasarlanmıştır. 
+Yöntem, web sayfasında belirtilen web öğesi etkinleştirilirse bir 'doğru' değeri ve web öğesi
+ web sayfasında etkin değilse (devre dışı bırakılma durumu) bir 'yanlış' değeri döndürür.
+Bu nedenle, yukarıdaki kod parçacığı, gönder düğmesinin etkin olup olmadığını doğrular ve sonuca bağlı olarak bir Boole değeri döndürür.
+İsEnabled () yöntemi, yalnızca 'A Koşulu' yerine getirildiğinde 
+öğenin (esas olarak düğme) etkinleştirildiğinden emin olmak istediğimiz senaryolarda önemlidir. Aynısı için aşağıdaki resme bakın.
+
+sprint planlama
+user storyler puanlanır ve sonra dağıtılır.
+gruming meeting amacı proje başlarken user storyler detaylı anlatılır
+
+https://planningpokeronline.com/new-game puanlama user storyler için
+
+user storyler tek tek girilecek.
+
+
+
+ @Given("kullanici_{string}_sayfasina_gider")
+    public void kullanici__sayfasina_gider(String url) {
+        try {
+            Driver.getDriver().get(ConfigReader.getProperty(url));
+        } catch (Exception e) {
+            Driver.getDriver().get(url);
+        }
+
+    }
+
+PL/pgSQL NEDİR
+
+blok yapıli dildir.kod blockları scop yani.
+declare tanimlama
+began işlemler yapılır if else 
+end sonlanır
+
+block içinde block nested yani
+outerblock
+child block
+
+variable_name data type:=expression;
+$$ blockun başına koymayı unutma
+-- yorum atırı
+/*
+*/satırlı yorum
+do herhangi bir return yapmayacak
+Dolar özel karakterler öncesinde tırnak için
+numeric (4,2) enfazla 4 rakamdan oluşur aynı zamanda virgülden sonra 2 rakam olabilir
+raise print  notice bildiri
+raise notice / exception 
+
+DDL DQL sadece okuma DML date manipulation
+JSON JAVA SCRİPT OBJECT NOTATİON
+
+CRUD 
+GET READ
+POST CREAT
+PUT  FULL UPDATE
+ DELETE DATA DELETE
+PATCH PARTİAL UPDATE
+
+https://petstore.swagger.io/
+post endpoint body for creater
+
+200 positive test
+400 negative test
+endpoint url uri
+swagger document endpointleri almak ve nasıl kullanmamız gerektiğini burdan bakiyoruz
+postman manuel test programı
+Restassure library
+serialization java yı Json datasına çevirmek için 
+De serialiazation json datasının java objesine çevrilmesini sağlamak json jackson gibi
+
+string 
+map uygun java objesi oluşturmalıyız sonra json döndurülecek
+
+
+
+@Test
+@BeforeSuite
+@AfterSuite
+@BeforeTest
+@AfterTest
+@BeforeGroups
+@AfterGroups
+@BeforeClass
+@AfterClass
+@BeforeMethod
+@AfterMethod
+@DataProvider
+@Factory
+@Listeners
+@Parameters
+
+basic outhorization
+authorization
+outentication  diffrient word
+
+////////////////////////////////////////////////////////////////////////////////
+plugin cucumber for java 
+gurkins olmalı
+
+  <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.11.2</version>                                                                cucumber da olmazsa olmazlar
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>7.11.2</version>
+            <scope>test</scope>
+////////////////////////////////////////////////////////////////////////////////////////////
+
+https://labs.play-with-docker.com/ doker kullanabilir kurulum yapılmadan
+https://docs.docker.com/desktop/install/windows-install/
+
+
+
