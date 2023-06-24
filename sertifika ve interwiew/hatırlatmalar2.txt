@@ -330,6 +330,73 @@ b.FluentWait (3) olarakta biliniyor
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 ctrlalt v tüm importlar////
+**************************exceptions************************************************
+***********NoSuchElementException*****
+-yanlış locator                                                                     -----locate kontrol et
+-pop up,yeni pencere, iframe..                                     --manuel kontrol et pop up, iframe kontrol et
+-sayfa dolmalardar problemler ve yavaşlamalar--ımplicite wait yeterli değil se explicite wait veya fluent wait kullanırız
+-sakli olan elementler. hide                                          ----
+
+***************TimeOutException***
+--süre bitti.zaman aşımı.ExpliciteWait kullanıldığında ve element bulunamadığında alinir. implicite wait kullanıldığında nosuchelementexpection alınır
+--explicite wait ve yanlış locator--->>>>timeout
+--explicite wait ve dogru locator ve sure yeterli değil-->>>>time out
+--explicite wait ve doğru locator ve sure dogru  ve iframe var element bulunamadı -->>>>timeout
+
+solution timeoutexception
+1.süreyi arttırırız
+2-farklı explicite wait cesidi denene bilir. VisibilityOfElementLocator yerine presenceOfElementLocated kullanılabilir.
+yada javascript executor daki waitleri kullana bilirim****sayfa geçişleri için kullanılabilir
+3-locator kontrol edilir
+4-Frameworkumde haziır reuseable methodlar var bu durumda timeoutexception aldigimda hizlica o methodlari kullanip sorunu cozeriz
+
+
+******************************************NullPointerException*******************
+**bir kova var ama içi boş. yok gibi.atama yapmdık.declera etmedik.Loginpage loginpage; gibi new kelimesi kullanmadığımız zaman olur.
+**bir variable oluşturup instantiate etmediğimizde alıriz. **new kelimesini unuttuğumuzda alırız. 
+WebDriver driver;
+deyip new ChromeDriver() demez isek nullPointer Exception Alırız. çözüm initial etmek instantiate etmek**
+declare ettik ama değer atamadık null pointer exception alırız.
+
+**********************StaleElementReferenceException****
+**Stale Element =eski, kullanılamaz durumda ,kullanıma artık elverişli değil
+***1 sayfayi yenilediginizde (refresh()) duvar kagıdı boya  locator aynı ama kullanılamaz
+***2 sayfada back and forward ileri geri gittigimizde 
+
+driver.navigate().refresh();
+driver.navigate().back();
+//çözüm stale olan elemenın locate tini tekrar yaz **********
+
+**********************WebDriverException*************
+
+** 1-driver versiyonları veya browser versiyonları ayni veya bir birinine yakın olmadığında alınır.pom xml file bak
+**2-- driver browser ı kapattıktan sonra tekrar kullanmak istediğimiz de ortaya çıkar
+***çözüm**
+1-framework designimizin iyi olması gerekir. driver clasında bir den fazla driver.quit() methodu olmamalı.***
+
+
+*ElementNoInteractableException
+*ElementClickInteractavleException
+*InvalidArgumentException
+*JavascriptException
+*RemoteDriverServerException
+********invalidSelectorException*****
+*İnvalidElementStateException
+
+**what type of wait do you exception?
+**which wait do you prefer;
+**why do you prefer that wait?
+**how do you resolve synronization
+---hata mesajinı oku,yanlış locator iframe
+--hata mesajında belirtilen hatayı düzeltir ve test ederim
+--implicitly wait
+--explicitly wait--local solution                    synronization issue
+-fluent wait
+WebDriverwait
+Thread.spleep
+
+********takeScreenShot************
+1-dokumantasyon için test caselerin geçip geçmediğini kayda geçmek için.bug raporu için.ticket oluşturmak için
 
 
 
