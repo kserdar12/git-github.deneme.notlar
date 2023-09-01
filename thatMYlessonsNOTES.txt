@@ -1,0 +1,643 @@
+***tüm sayfa görüntüsü
+takescreenshot ile driver casting yapıyoruz
+
+1-TakesScreenshot ts= (TakeScreenshot)driver;
+
+2-kaydettiğimiz ekran görüntüsünü projede istediğimiz yere kaydebilmek için path ile yeni bir File oluşturalım
+File tümResim=new File("target/ekranresmi/tümSayfa);
+
+3-TakeScreenshot objesini kullanarak(ts) getScreenshotAs methodunu çalıştırarak ve resmi geçici bir file assign edelim
+
+File resimGecici=ts.getScreenshotAs(OutputType.FILE);
+
+4-geçici kaydettiğimiz resmi saklamak istediğimiz yere kaydelim.
+
+FileUtils.copyFile(resimGecici,tumResim)
+//////spesific webelement screen shot////
+1-Webelement locate edelim
+
+Webelement logoElementi=driver.findElement(By..);
+
+2-ekran görüntüsünü kaydecegim yerin path ile file oluştur
+
+File logoResmi=new File("target/ekranResmi/element");
+
+3-webelement üzerinden getScreenShot methodu kullanarak geçiçi bir dosyaya assign edelim
+
+File logoGecici=logoElementi.getScreenshotAs(OutputType.File);
+
+4 gecici resmi asıl dosyasına atalım.
+FileUtils.copyFile(logoGecici,logoResmi);
+
+****tüm ekran görüntüsünü seleniumdan gelen getScreenshotAs methodu kullanarak elde edilir
+****getScreenshotAs methdu seleniumdaki TakesSecreenshot api dan gelir.(ekran ile selenium arasında garsonluk yapıyor api)
+****----//*[contains(text(),'AAAAA')]
+
+**custom html reportları hazırlaya biliriz
+**extentReport
+extentHtmlReport
+extentTest logları yazdır.
+
+***//table[@id='table1']//tbody//tr[3]//td[.='serdar']
+
+
+****excell sayfası oluşturup test etme
+**pomxml sayfasına apachi poi ve apachi oomlx depencieslerini koymalıyız.
+*--java dosyasını sağ tıkla ve resources adında bir klasör oluştur.proje bazında da olabilir
+*-excel dosyasını at .
+bu resources dosyasına excel word text ... gibi dosyalar atılabilir.birden fazla dosyada olabilir. 
+ String path="./src/test/java/resources/ulkeler.xlsx";
+FileInputStream fileInputStream=new FileInputStream(path);
+Workbook workbook= WorkbookFactory.create(fileInputStream);
+    Sheet sheet1=workbook.getSheet("Sayfa1");
+Row row1=  sheet1.getRow(0);
+        //ilk satırdaki ilk veriyi al
+        Cell cell1=row1.getCell(0);
+
+  Map<String,String> ukleBaskentleri=new HashMap<>();
+
+        for (int satirSayisi = 1; satirSayisi<kullanilanToplamSayisi ; satirSayisi++) {
+           String country= sheet1.getRow(satirSayisi).getCell(0).toString();
+           String baskent= sheet1.getRow(satirSayisi).getCell(1).toString();
+           ukleBaskentleri.put(country,baskent);
+        }
+        System.out.println(ukleBaskentleri);
+
+
+    }
+
+***WRİTE EXCELL*******
+ @Test
+    public void writeExcelTest()throws Exception{
+        String path="./src/test/java/resources/ulkeler.xlsx";
+
+        //dosya yı aç
+        FileInputStream fileInputStream=new FileInputStream(path);
+        //excel dosyasını aç workbooku aç
+        Workbook workbook= WorkbookFactory.create(fileInputStream);
+
+        //sayfayı aç sheet1
+        // Sheet sheet1=workbook.getSheetAt(0);//index 0 dan başlar ilk sayfayı aç veya
+        Sheet sheet1=workbook.getSheet("Sayfa1");
+
+        //ilk satıra git row
+        Row row1=  sheet1.getRow(0);
+
+        //ilk sutun 4.stun create et
+        Cell cell4=row1.createCell(3);///dikkat
+        //nufus yaz
+        cell4.setCellValue("BASKENT");///dikkat
+
+        sheet1.getRow(2).createCell(4).setCellValue("450000");
+        sheet1.getRow(3).createCell(4).setCellValue("600000");
+
+
+        //KAYIT İSLEMI FILE OUTPUT STREAM İLE YAPILIR
+        FileOutputStream fileOutputStream=new FileOutputStream(path);
+        workbook.write(fileOutputStream);
+    }
+
+tekrar
+*microsoft dosyalari ile iletişime geçmek için apache poi dependency kullanilir.
+->dosya/workbook/sheet/row/cell
+getLastRowNumber
+getPhsicalNumberOfRows
+**JS EXECUTORS 
+
+**java executer seleniumun parçası javascript executor javascript kodlarını okumaya yarar.bir butonun rengini değiştirmek için kullanılır.selenium yetersiz kalabililr.
+click,belirli bir elemente scroll etme type input vb.
+***what we can do with js executor?
+click.hidden elementler.
+saga sola aşagı yukarı  ve belirli element görünene kadar scroll
+inputlara yazı deger atama yazma
+elementlerin renklerini değiştirme araka rengini değiştirme border(çerçeve) ekleme.
+
+**input tagı içindeki verileri js ile değiştirebilirim. value değeri gibi
+**input taki degerleri ancak js execute ile alabilirim genelde id kullanarak bulurum
+--javascript executor nedir
+-**seleniumdan gelen ve javascript kodlarini çalıştırmaya yarayan bir interfacetir.normal selenium methodlarinın yeterli olmadığı durumlarda kullanılabilir
+ne zaman ve nasıl kullandın
+-**sayfanın kaydırılma , click işlemleri, yada input kutularındaki değerleri almak için ve type yazdirmak için
+sayfayi aşagı yukari kaydirma islemi selenium nasıl yapılir
+-** actions yada javascript executor methodları
+actionslarda page_up,page_down, arrow_down, arrow_down yada js executor ile scrollintoview(true) method ile alinabilir.reuseable method oluşturmuştur
+selenium da click yaparken problem yaşadın mı
+-**evet yanliş locator,bekleme problemi,hiden gizli elementler tıklarkende java script  executor kullandım çözdum. java script browser ın dili.unutma
+selenium otomasyonunda ne tur problemler yaşadın
+ -** Teknik problemler=yanlış locator,bekleme(wait),alert,iframe ,pop-up,multiple window,hidden elementlere tiklama,capche,
+2-takımla ilgili problemler(çok gundeme getirilmemeli).
+
+*****LOG4J//////////////////////////////////////////////////
+-*AYRI BİR APİ depend.
+-*loglamak. damgalamak yazırmak için kullanilir bilgi hata debug //system.out.print gibi
+-*consola yazi yazdırabilirim ayni zamanda bir dosya oluştur içine yaz.extend report gibi screen shot gibi
+**developerlar daha kullanılır.
+**çeşitli seviyelerde loglama yapılabilir uyari bilgi debug fatal warn
+log4j kullanıyoruz projemizde
+-* log4j kullanılırsa zaman bilgisi-kalıci dosya oluşturulabilir. fatal error info debug yazilalari yazdirilabilir.
+/////,
+ private static Logger logger= LogManager.getLogger( C02_Log4j.class.getName()); içine klass adı.class unatma
+    @Test
+    public void log4JTest(){
+        //logger objesi ile yazdırma işlemi yap //defoult olarak fatal ve erroru verir
+        logger.fatal("Fatal log!");
+        logger.error("Error log!");
+        logger.warn("Warn log!");
+        logger.debug("Debug log!");
+        logger.info("Info log!");
+
+    }
+
+1-dependencileri ekle
+2-class aç yukaridaki gibi
+3proje seviyesinde resources dosyasi oluşturmaliyız. ayar dosyası xml. dosyası olacak bunun altına log4j2.xml file dosyası oluşturalım
+
+//*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/
+
+Xpath Seçicileri çeşitli biçimlerde bulunabilir:
+
+Standard Xpath 1-driver.findElement(By.xpath(“//input[@id= ’login-username’]”))
+Contains     2 driver.findElement(By.xpath(“//input[contains(@name, ‘q’)]”))
+AND & OR 3 OR için syntax: Xpath=//input[@class=’value of id’ OR @name=’value of name’]    AND için syntax: Xpath=//input[@class=’value of id’ AND @name=’value of name’]
+Starts-with  driver.findElement(By.xpath(“//input[starts-with(@class,’gLFyf’)]”))
+Text  Syntax: Xpath=//div[text()=’value of text’]
+
+2)CSS Selector Kullanımları
+
+CSS Seçicileri çeşitli biçimlerde bulunabilir:
+
+Tag ve ID driver.findElement(By.cssSelector(“a#login”)) id yerine #
+Tag ve Class     driver.findElement(By.cssSelector(“div.SearchBoxOld-buttonContainer”))  # yerine . kullanılır.
+Tag ve Attribute    Syntax: css= (HTML Tag)[Attribute=Value]
+Tag, Class ve Attribute   Syntax: css=(HTML Tag)(.)(Class)([attribute=’Value of attribute’]) driver. findElement(By.cssSelector(“input. inputtext login_form_input_box [name = ‘pass’]”))
+Matches (Starts with, Ends with, Contains)---  Syntax: css=(HTML tag)([attribute^=’start of the string’])  driver.findElement(By.cssSelector(“input[name^=’em’]”))--
+**
+Syntax: css=(HTML tag)([attribute$=’end of the string’])
+
+Bu elementin Css Selectorunu Ends With yöntemiyle yazalım;
+
+driver.findElement(By.cssSelector(“input[name$=’ail’]”))
+
+**
+Syntax: css=(HTML tag)([attribute*=’partial string’])
+
+Bu elementin Css Selectorunu Contains yöntemiyle yazalım;
+
+driver.findElement(By.cssSelector(“input[class*=’control’]”))
+
+
+Child elementler
+
+Syntax: Css= tagname . class name li : nth-of-child(child element indexi)
+////////////////////************************************************************************************
+maven selenium junit apache poi java faker apache core
+SKİLLS
+-languages:
+java,lamda,xml,sql,html,css
+-frameworks :
+JUnit,TestNG,Cucumber
+-Desing pattern:
+page object model
+-tools:
+selenium webdriver-testNG-cucumber-maven-postgreSQL-JDBC-INTELLİJ,ECLİPSE,JİRA,Jmeter,postman,restful api,selenium grid,
+git,github,awc e2e,APPIUM
+version control sistem:
+git,bitbucket(jira ile aynı şirket ücretli)
+Front End Testing:
+selenium Webdriver
+APİ TESTİNG:
+postman for manuel testing,Restful for automation 
+BACKEDEND/DATABASE TESTİNG:
+SQL JDBC
+CONTİNOUS İNTEGRATİON(CI,CD),CONTİNOUS DEPLOYMETN(CD):
+Jenkins
+REMOTE TESTİNG:
+Selenium Grid,jenkins
+*****************************************************************************************************
+
+/*/********///*/*///////////////////////////////////////
+TEST NG KONULARI
+Anotains
+Test Gruplari
+TestNG xml dosyalari
+data provider
+paralel testing
+PAGE OBJECT MODEL
+
+***
+NEXT GENERETİON KELİMELERİNDEN GELİYOR.CEDRİC BEUST YAPMIŞ
+AÇIK KAYNAK-TESTNG BİR KÜTÜPHANE
+SADECE JAVA İLE ÇALIŞIR.JDK 7 VE ÜSTÜ OLMALI.
+5 BEFORE 5 AFTER METHODU VAR
+JUNİTE 2 BEFORE 2 AFTER METHODU VARDIR.
+**dataprovider sadece testng var.
+**listener
+**xml dosyaları
+**---priority
+**---dependsOnMethod
+**--paralel ve cross-browser test yapabiliriz
+**-html ve xml raporlarına imkan sağlar
+
+////TESTNG PROJE OLUŞTUR////
+---yeni bir maven projesi oluştur
+--javanın altına tecproed dosya oluştur.
+*tecproed sağ tıkla tests
+*techroed sağ tıkla utilities
+*techproed sağ tıkla pages dosyalarını oluştur
+depencylepere 
+*selenium java-junittede kullandık
+*webdrivemanager-junittede kullandık
+*testNG YÜKLE yeni
+
+***afterclass anotation ı herzaman statik olmalı public static void afterClass(){} gibir
+
+    /*
+    suite:proje farklı anlamları var smoke testlerde göreceğiz
+    @Test: test case oluşturmak için kullanılır
+    @Before ve @After :5 before 5 after anotations var
+    suit>tests>grup>class>method
+    @BeforeSuit: her bir test suite den önce 1 kere çalışır
+    @AfterSuit: her bir test suite den sonra 1 kere çalışır
+    @BeforTest: her bir testen önce(test case değil) 1 kez çalışır
+    @AfterTest: her bir testen sonra 1 kez çalışır
+    @BeforeClass: her bir classdan önce bir kez çalışır
+    @AfterClass: her bir classdan sonra bir kez çalışır
+    @BeforeMethod: her bir @test anotationdan önce bir kez çalışır.Junitte karşılıgı @Before
+    @AfterMethod: her bir @test anotationdan sonra bir kez çalışır.Junitte karşılıgı @After
+    @Ignore : @Test caseleri çalıştırmak istemez isek skip
+    anable():false veya true şarteli kapat
+    testNG de testler naturel order ile çalışır isim sırasına göre çalışır
+    Test caseleri öncelemek için priority ile sıraya koyabiliriz
+    @Test(priority=7)
+     */
+*/////////////dependsOnMethods************************//
+dependOnMethod: testleri bir birine bağımlı olacak.homepage ()///searchPage örneğindeki gibi
+hometest geçmez ise searchTest çalışmaz.searchTest ignore olur.
+  @Test
+    public void homeTest(){
+        System.out.println("homeTest");
+        Assert.assertTrue(false);//bilerek fail yaptık
+    }
+    @Test(dependsOnMethods = "homeTest")
+    public void searchTest(){
+        System.out.println("searchTest");
+
+
+-*---hard assertion JUNİT TESTNG CUCUMBER DA VAR
+assertion failed olursa ondan sonraki satirlar çalışmaz stop execuition
+
+*---softassertion sadece testNG VAR
+eğert bir adım failed ederse testler devam eder.sonunda verir geçen geçmeyen testeleri verir.
+sortasert objesi oluşturulmalı.
+SoftAssert softAssert=new SoftAssert;
+ softAssert.assertTrue();
+softAssert.All(); bunu kullanmak şart aksi halde herşey pass olarak gösterir.
+
+amaçları farklı olsada methodlari ayni
+
+/*/*/*/*/*/*/Page Object Model/*/*/*/*/*/*/*/*/*/*/
+-elementleri depolayıp tekrar tekrar kullanabiliriz
+-maintable tamir edilebilir kodlar değiştiğinde tek yerde değişiklik yapmak yeterli olacak
+-reusable objeler sayesinde tekrardan kurtulacağız
+understandable daha anlaşılır ve faster
+
+bir sınıfta webelementleri tanımlıyoruz 
+@FindBy(id="dafd") 
+public Webelement username;
+anotasyonu ile locateleri tanımlıyoruz. aynı sayfaya method da yazabiliriz.
+
+özel pagelar özel sınıflar özel filelar
+***driver classı oluştur
+***.properties file oluştur proje seviyesinde configuration dosyası
+***config reader sınıfın amacı configuration.properties dosyasından verileri almak için yapılır başka bir amacı yok
+**static block nedir. config reader da kullandık
+**Singleton design statik ve public yaptık tüm projede tüm sınıflar aynı şekilde ulaşacak ayrıca farklı driverların üretilmesini engelleyecek
+**Driver class larda frameler kullanılır statik driver ayrıca getDriver methodu
+**dosya okumak yazmak java sınıfı oluşturmak lazım.configReader gibi seleniumla dosya okuyamayız.
+
+
+******smoke test nedir****************************************
+her gün yapılan programın en önemli özelliklerinin test ettiğimiz testtir.
+-login
+-checkin
+-Checkout
+-add to card
+-make payment
+-sign out
+*her sabah 8 de jenkins kullanılabilir.15-20 dakika sürer.jenkins raporlar her otomatik.virtual machine ve ya local bilgisayarınızda da olabilir.
+*smoke bir clasör olur.içine smoke test caseleri yazarız.
+-smoke testinizde kaç test var 15-20 arası olabilir.
+-tüm smok test caselerimizi automate edilmiş midir.önemli olanların hepsi outomate edilmiştir.
+-hangi testlerin smoke test e ekleneceğine kim karar verir? Test lead sr automation tester.en kıdemli tester.qa 
+
+*************Regression test nedir**************
+*tüm ana fonksiyonların majorın test edildiği test tipidir.genel saglık kontrolü.ekleme çıkarmaların etkisi olcülür
+-Smoke test +(müsteri profili ile yapılsin)
+-diğer müşteri hizmetleri ,admin,tech support bu yerlere girdiğinde hangi arayüzü görür
+-farklı ödeme sistemleri dener (paypal amex visa mastercard
+-ne sıklıkla yapılır?
+production bug fix lerden sonra
+major ana releaselerden önce örneğin biz 6 ayda bir release yaparız
+-regression test ne kadar sürer?
+6-7 saat sürebilir.bazı manuel test caseler varsa ise test süresi uzar.
+-bir regression teste kaç test case vardir?500 den fazla test case var.
+-tüm regression testlerimiz automation edilmiş midir?
+hedefimiz tüm regression testlerimizin automate etmek fakat bu pek mümkün olmuyor.yüzde 80 civarı
+-hangi testlerin hangi regression test olacağına kim karar verir.
+ Test lead sr automation tester.en kıdemli tester.qa 
+-**Outomate edilmeyen bir durum.
+***----***dogruma gerektiren storylerde automate edemiyoruz.telefonlara şifre geliyor capche gibi
+****----***aşırı guvenlikli durumlar
+***--***bazı teknik user storyler sadece developerlar ile alakalı olabilir.testerlerin onlariın environmentlarına accesleri mümkün olmuyor.
+
+*/////******excel automation**
+datalar dışardaki bazı dosyalardan gelebilir
+external files-config.properties-excel-json-Xml-database-APİ-faker dan data gelebilir.veri havuzları.
+*/1-excel için maven reporstory den apachi poi.  poi oooxml ile birlikte
+2-resource dosyası test-java klasörünün altına dosya oluştur.excell dosyasını oraya at
+3-excell utilste reuseable methodlar oluşturmalıyız
+4 test case oluşturabiliriz
+
+*****./ önceki kısımları umursama görme "./src/test/java/resources/mysmoketestdata.xlsx";
+
+******************DATA PROVİDER---------------------------------
+-veri havuzu oluşturmak için.
+sadece TESTng de var***
+**return tpe 2 boyutlu array dir.
+**2 tane parametre kullanılabilir
+name ve paralel zorunlu değil.
+/*getwindowhadle return tpi set.
+
+
+   veri deposudur.
+    **2 boyutlu array ve objec uretir
+    **sadece test ng nin bir özelliğidir
+    DDT DATA DRİVEN TESTİNG İÇİN BİRDEN FAZLA DATAYİ TEST ETMEK İÇİN KULLANIRIZ
+    *@DataProvider annotasyonu ile veri havuzu oluşturuz.@test methodlarına dataProvider parametresi ile baglanır
+    2 adet parametre vardır.
+    ***name:method ismi override etmek için yani farkli bir isim ile data provideri çağırmak için kullanılir
+    ***parallel :paralel test case oluşturmak için kullanılır
+    **dataprovider la browserdan veri alamaaayız
+
+****DATALARI EXCELLDEN DATAPROVİDERA ÇEKMEK*******
+
+  @DataProvider
+    public Object[][] customerData(){
+        //dataprovider test2 den farkı dataları excelden aldık.bu kullanım daha iyidir.
+        String path="./src/test/java/resources/mysmoketestdata.xlsx";
+        String sheetName="customer_info";
+        ExcelUtils excelUtils=new ExcelUtils(path,sheetName);
+
+        Object[][] müsteriBilgiler=excelUtils.getDataArrayWithOutHead();
+
+
+        return müsteriBilgiler;
+    }
+
+***control alt L CODE FORMAT
+xml file ////////////////////////xml file
+1.yol
+ayar dosyası.
+xml dosyasında belirli classları ,methodları düzenli şekilde çalıştırabiliriz.
+TestNG xml dosyaları testleri otomotik olarak çalıştırmaya yarar. paralel test ve listenerları bunla kullanılır.
+***suitleri ,test package larını, classları veya methodları çalıştırırız.ayrıca gruplar da var
+***include /////exclude  flexiblity esneklik kazandırır.
+https://testng.org/doc/documentation-main.html bilgi için
+verbose="1" consoldaki bilgi miktari 2,3 olabilir hiç olmayabilir
+
+test ng plugin****** 2. yol
+FİLE-AYARLAR-PLUGİN-TESTNGXML İNSTALL sonra tekrar başlat.
+yüklü ise herhaangi bir dosya üzerinden sağ tıkla xlm oluştur.
+
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="minor regression">
+    <test verbose="2" name="regression1">
+        <packages>
+            <package name="techproed.*"></package>
+        </packages>
+    </test>
+</suite>
+
+***git github confilict çözümü****
+1-kendi kodlarını bir yere kaydet word gibi
+2-projeyi sıfırdan clone et
+3-kendi kodlarını sıfırdan ekle
+4-git pull
+5-git add . git commit git push
+
+
+TESTNG PARALEL TEST
+1-Sequntial testing test1->test2->test3
+2-paralel test aynı anda birden fazla test çalıştırılması.test zamanını azaltmak için zaman kazanmak
+**paralel : paralel kelimesi ile xml dosyasında kullanılır
+**thread-count -> tarayıcı sayısı veya code sayisi 
+1-paralel test Dataprovider ile de yapılabilir.kısıtlı kullanım*****
+@DataProvider(paralel =true)
+xml file:
+paralel test için kullanılır
+data-provider-thread-count=Thread(code veya tarayici )sayisi
+2-xml file ile***********************************************
+paralel test için kullanılır
+thread-count=Thread(code veya tarayici )sayisi
+<suite name="All Test Suite" parallel="classes" thread-count="3"> 
+test ng frame workünde çalıştırmak sıkıntı çünkü singlton driver kullandığımızdan.
+
+////******LİSTENERS***************---------------------///
+İNTERFACE 8 çeşit ITESTLİSTENERS
+-Listenerslar ile testng frame workü modify ederiz.
+-xml dosya olmadan da listenerslar çalıştırılır ama xml ile daha iyidir.
+1-@Listeners anotation ile
+2-testng.xml file ile çalıştırabiliriz.
+seleniumdaki kodları dinler.fail eden testleri dile getirir.neden kaldı.skip olanı yazar.kısaca raporlamayı iyi yapar.
+test case sonuclarını exception errors testlerin başlama bitiş anlarının geçmelerini fail durumlarını dinletir bize
+-hatta sayfa geçişlerini,button tıklama,data girme,loglama içinde kullanılır.log4j,extendReport,
+sadece TESTNG ÖZEL.
+7 testmethodu var Itest TE
+
+--onStart(ITestContext arg0) methodu
+tüm testlerden önce birkez çalışır(@BeforeSuite gibi)
+
+--onFinish(ITestContext arg0) methodu
+tüm testlerden onra birkez çalışır(@AfterSuite gibi)
+
+--onTestFailure(ITestResult result) methodu
+sadece fail eden testlerden önce çalışır
+
+--onTestSkipped(ITestResult arg0)
+ignore edilen testlerden hemen sonra çalışır atlanan
+
+--onTestStart(ITestResult arg0)
+her bir testten sonra bir kez çalışır(@AfterMethod benzeri)
+
+--onTestSucces(ITestResult arg0)
+sadece pass eden testlerden hemen sonra çalışır
+
+--onTestFailButWithinSuccesPercentage(ITestResult arg0)
+belirli bir test Fail sonrası çalışır
+
+1-utils da LİSTENER CLASS OLUŞTUT
+2.implement ITestListener interface . bu test basse class gibidir
+3-ITest methodları ekle 7 tane yukarıdaki
+4-test package da yeni bir packagea ac :listeners
+5.listener packagenın altına yeni clas oluştur :ListenesTest
+not test claslar ile listenerları ilişkilendirmenin iki yolud vardır.
+1-@Listeners annotation  @Listeners(techproed.utilities.Listeners.class)  //test clasında clas sviyesinde yazılır
+2-xml file ile ve listeners tag kullanarak
+<listeners>
+<listener class-name="techproed.utilities.Listeners">  //suiten sonra tamımla
+<listeners>
+
+**kalan testleri istediğimiz kadar tekrar çalıştır.**********LİSTENERSRETRY***********İNTERFACE
+1.UTİL clas oluştur ımplement et RetryAnalyzer 
+2-test sınıfı ile retry ile ilişkilendir @test(retryAnalyzer=techproed.utilities.ListenersRetry.class) -methodla ilişkilendirilir.
+3-sonuç herhangi bir test fail ederse bunu .... kez çalıştır ve sonuç aynı ise fail ver
+**REtry ı testng xml dosyaları ile de çağırabiliriz.
+***ListenerRetryAnalyzer tüm fail test caselerin çalıştırılmasını sağlar.
+*----listeners->ITestListener implement ediyor
+*---listenersReTry-> IRetryAnalyze implement ediyor
+*---IRetryAnalyze->IAnnotationTransformer implement ediyor utils clasta dikkat et.
+
+
+testng den geliyor apı değil interface tir listeners ve listenerstry
+
+TESTNG REPORTS-//*/*/*/**
+//eclips kullanıcılarının en çok sevdiği rapor çesidi testng reports.biz inteligent kullanıyoruz.
+Eclips:test-output dosyası testng non xml raporları otomatik olarak oluşur.
+Intelij: bu dosyanın oluşması için mini bir ayar yapmak gerekir
+
+--smoke test e sağ tıkla xml file dosyası oluştur
+--run et sonra
+--projeyi tıkla ->Run-> Edit configuration
+--xml dosyasını seç Listeners-> + tıkla>reportları ekle
+APPLY >OK
+xml i run et
+--proje yenile
+--Test-output dosyasında raporlar çıkmalı
+-sadece test ng de olan bir rapor
+**bu yaptımız xml file dosyasında pagelarımızı ,classlarımızı çalıştıra biliriz.log4j deki gibi reporter.log  sınıfını çağırarak sınıf içinde yaptımız
+işleri raporlaya biliriz.
+
+
+////BDD/// behavior driven development//CUCUMBER START
+cucumberin dili gherkin dili
+Feature file
+Feature epic
+Scenario test case
+Given stepler
+And
+Then
+**davranışlar tanımlanır
+**agile methodolijisinde code bilmeyen kişiler olabilir
+**anlaşılabilir ingilizce veya türkçe kullanılır
+**TDD TEST DRİVEN DEVELOPMENT.
+hibrit frame work 
+cucumber ,junit ve testng ile kullanılabilir.ama biz cucumbe-junit kullanıcağız
+cucuber raparu
+extent rapor
+cucumber jbm güzel bir rapor
+reuseable test adımları
+
+
+1-Create project:file-new-prject-select maven-click next
+2-name:ahmetBayram-cucumber
+3-add dependencies=selenium-java,webdrivermaneger-cucumber java-cucumber junit
+4-click maven=click"Enable auto-reload after any changer" bu mesaj görünmeye bilir
+5-javanın sürümü ile alakalı sorunları hal etmek için
+<properties>
+<maven.compiler.source>1.8</maven.compiler.source>
+<maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+6-java sağ tıkla aşagıdaki paketleri oluştur
+a-utilities
+b-pages
+c-runners test caseleri çalıştırmak ve kontrol etmek için kullanacağız
+d-stepdefinitions (kodlarımızı burda oluşturacağız)
+7-projeye sağ tıkla configuration.properties dosyası oluştur
+8-utilities paketi altında Driver ve ConfigReader dosyası oluştur
+9-test paketi altında yeni klasör oluşturalım :resources
+10-resources klasorünün altına yeni bir klasor oluşturalım :features java kodu içermeyen dosyaları buraya  koyacağız
+11-features sağ tıkla yeni dosya oluşturalım:ilkfeaturefile.feature
+12.cucumber plugin i intellij e ekleyelim (settings/plugins)
+a( mac) Intellij Idea->Preference-plugins-marketplace-Type Cucumber for Java-Install-restart
+b (windows) file->setting-plugins-marketplace-Type Cucumber for Java-Install-restart
+
+
+RECAP-1 **********************RECAP-1*******************
+
+********SELENİUM*************
+1-selenium nedir niçin kullanılır
+-jar dosyası .bir api.bu dosyada birçok hazır class ve method vardır.
+-bu class ve methodlar web atomasyonu için kullanılır.
+-farklı kodlama dilleri ile çalışır(java ,c#, pyhton..
+-farklı işletim sistemleri ile çalışır(macos,windowa,linux
+*-Selenium ile direk olarak mobil test ve desktop otomosyonu yapılamaz.ama third-party araciyla mobil(APPİUM) desktop otomasyon selenium ile yapılabilir
+*-auto it,robot class yardımı ile yapılabilir.
+-windowshandle,actions,iframe,alerts,dropdown,cookies,webelementlerin bulunması,klavye ve mause,javaexecuter ile çalışır.extent reports,@findby seleniumdan geliyor
+*********JUNİT*************
+1-JUNİT nedir nerede kullanılır
+-junit bir test frameworkudür.
+-test oluşturmak(@TEST),before/after annotasyonları, Assertion(asert) lerde kulllanılı
+-junit eski ve basilt bir test framworkudur.advanced şekli TestNG DİR
+-genelde developerlar unit test lerde için kullanırlar
+-selenium gibi jar dosyası.executeable.sıkıştırılmış çalıştırılmış.farklı farklı kütphaneler var
+**************TESTNG*****************************************
+1-testNG bir test frame workudur
+-bir jar dosyasıdır
+-test oluşturmak(@TEST),before/after annotasyonları, Assertion(asert) lerde kulllanılır
+-ek olarak before grups, beforeTest,beforSuite
+-soft assertion
+-DependsOnGroups,DependsOnMethods
+-TestNg LİSTENERS (ITestListeners,IRetryAnalyzer,IAnnotationTransformer)
+*kodları dinlerr(pass ,fail,skip)
+*test fail ettiğinde fail testen hemen sonra ekran göruntüsü alabiliriz
+*fail testlerini tekrar tekrar run ettirebiliriz.
+-TestNG XML dosyaları .xml
+-test caseleri run etmek için, 
+-belirli method,class,paket, ve gruplar için xml dosyaları oluşturup o xml dosyalarına eklemiş olduğum test caseleri çalıştırabiriz
+ frameworke ek özellikler getirmek için ve ek ayarlar
+*test grupları oluşturmak için
+*paralel test
+*cross browser test bir testcase i önce chrome sonra firefox ta çalıştır diye biliriz
+*smoke testlerin çalıştırılması
+*regression testlerli çalıştırılması
+*listeners ların kolay çalıştırılması için
+-paralel test yapılabilir paralel thread-count key wordleri.
+testNG raporlar. run-edit configuration-raporları ekliyoruz
+-Emailable reporter
+-failed reporter
+-test html reporter
+-suit html reporter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
