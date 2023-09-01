@@ -1,4 +1,4 @@
-***tüm sayfa görüntüsü
+***tüm sayfa görüntüsü***************
 takescreenshot ile driver casting yapıyoruz
 
 1-TakesScreenshot ts= (TakeScreenshot)driver;
