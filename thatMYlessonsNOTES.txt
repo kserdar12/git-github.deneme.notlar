@@ -565,6 +565,17 @@ b (windows) file->setting-plugins-marketplace-Type Cucumber for Java-Install-res
 
 RECAP-1 **********************RECAP-1*******************
 
+/////-----------------------MAVEN-------/////////////////////////////////////////////
+
+-java Projesi oluşturmak için kullandığımız bir araç.project built tool
+-jar dosyalarıyla ugraşmak yerine pom.xml dependencieslerde eklentileriyle proje oluşturulur.
+-bir yemeğin tenceresi.selenium -testng-java faker-apache eklentileri
+-içene rapor ekleyebiliyoruz.
+-mvn clean özelliği ile classları çalıştırabiliriz
+*---*maven alternatiflari nelerdir.
+Gradle,android,groowy,kotlin,java,ant bunlar project built tool
+-maven is used to built project,run to project,deploy to project
+
 ********SELENİUM*************
 1-selenium nedir niçin kullanılır
 -jar dosyası .bir api.bu dosyada birçok hazır class ve method vardır.
@@ -608,6 +619,48 @@ testNG raporlar. run-edit configuration-raporları ekliyoruz
 -failed reporter
 -test html reporter
 -suit html reporter
+*dataprovider
+-data kaynagı olarak kullanılır.
+-dataların test caselere aktarır.
+-en önemli özelliklerinden biri dataları otomatik olarak itereate etmesidir.loop kullanmaya gerek yok
+-data provider ile paralel test yapılabilir
+***cross browser için selenium grid şart değil
+
+-İNTERVİEW
+1-Release (birakmak,yayınlamak)e katildın mi;
+yılda 2 önemli (major fall ,spring) release, 4 minor release olur.
+-update release lerden sonra gelir.
+her bir release den önce regression testi yapılır.RELEASE de tester da hazır bulunur.
+Release leree product owner ve regression testerlar aktiftir.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
