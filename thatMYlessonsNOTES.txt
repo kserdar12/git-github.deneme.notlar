@@ -670,10 +670,37 @@ and
 TDD VE BDD  JUNİT VE TESTNG KULLANABİLİRİZ
 excelle yaptıgımız herseyi cucumber da var.
 
+-**resource dosyası kaynak dosyamız directory olarak oluşturuyoruz.directory=package / 
+bunun altında yeni directory olarak features folder ı oluşturacağız.bu dosyayı cucumber a tanıttık
+**.feature dosyası yesil ise sorun yok. gri ise plugin kurmak lazım.cucumber plugin kurmak lazım.file+setting-plugin-marketplace-cucumber for java -installed-
+-gherken installed
+
+**.feature dosyası 
+  # her feature file,Feature:kelimesi ile  başlamak zorunda EPİC diğer adı.testsayfamız
+  # her bir file da yanlız bir Feature:  kullanılabilir.Feature: 
+  # Test caselerimizi  Scenario(test case) da yazarız
+  # verification yapmak istediğimiz adımlar da Then le başlamak önceliğimiz olmalı.ortalar when ve and
+  #  her bir file de birden fazla scenario kullanılabilir
+  # her bir adim Given When And Then But * kelimeler anahtar kelimeler
+  #Given genelde ilk satırlar pre-condition stepleri için kullanılır
+  # Then genelde son satırlarda verification stepleri için kullanılır
+  #NOTE: teknik olarak istenilen kelime istenilen stepte kullanılır. ama anlam karmasası olmaması için bu adımlar takip edilir
+  
+
+//runner class
+//bu sinif test caseleri run etmek için kullanilir
+//ve configurationslar için kullanınır
+
+@RunWith(Cucumber.class)
+@CucumberOptions( 
+        features = "./src/test/resources/features",
+         glue="stepdefinitions" ) not features ve step definitions ayni paket altında olduğundan src/test.. ile başlamadık
 
 
+public class Runner {
 
 
+}
 
 
 
