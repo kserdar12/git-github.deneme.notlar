@@ -519,49 +519,6 @@ xml i run et
 işleri raporlaya biliriz.
 
 
-////BDD/// behavior driven development//CUCUMBER START
-cucumberin dili gherkin dili
-Feature file
-Feature epic
-Scenario test case
-Given stepler
-And
-Then
-**davranışlar tanımlanır
-**agile methodolijisinde code bilmeyen kişiler olabilir
-**anlaşılabilir ingilizce veya türkçe kullanılır
-**TDD TEST DRİVEN DEVELOPMENT.
-hibrit frame work 
-cucumber ,junit ve testng ile kullanılabilir.ama biz cucumbe-junit kullanıcağız
-cucuber raparu
-extent rapor
-cucumber jbm güzel bir rapor
-reuseable test adımları
-
-
-1-Create project:file-new-prject-select maven-click next
-2-name:ahmetBayram-cucumber
-3-add dependencies=selenium-java,webdrivermaneger-cucumber java-cucumber junit
-4-click maven=click"Enable auto-reload after any changer" bu mesaj görünmeye bilir
-5-javanın sürümü ile alakalı sorunları hal etmek için
-<properties>
-<maven.compiler.source>1.8</maven.compiler.source>
-<maven.compiler.target>1.8</maven.compiler.target>
-</properties>
-6-java sağ tıkla aşagıdaki paketleri oluştur
-a-utilities
-b-pages
-c-runners test caseleri çalıştırmak ve kontrol etmek için kullanacağız
-d-stepdefinitions (kodlarımızı burda oluşturacağız)
-7-projeye sağ tıkla configuration.properties dosyası oluştur
-8-utilities paketi altında Driver ve ConfigReader dosyası oluştur
-9-test paketi altında yeni klasör oluşturalım :resources
-10-resources klasorünün altına yeni bir klasor oluşturalım :features java kodu içermeyen dosyaları buraya  koyacağız
-11-features sağ tıkla yeni dosya oluşturalım:ilkfeaturefile.feature
-12.cucumber plugin i intellij e ekleyelim (settings/plugins)
-a( mac) Intellij Idea->Preference-plugins-marketplace-Type Cucumber for Java-Install-restart
-b (windows) file->setting-plugins-marketplace-Type Cucumber for Java-Install-restart
-
 
 RECAP-1 **********************RECAP-1*******************
 
@@ -633,9 +590,85 @@ yılda 2 önemli (major fall ,spring) release, 4 minor release olur.
 her bir release den önce regression testi yapılır.RELEASE de tester da hazır bulunur.
 Release leree product owner ve regression testerlar aktiftir.
 
+****FİLE UPLOAD -DOSYA YÜKLEME**********
+1.<input id="file-apload" type="file" name="file">
+**** bu html kodu INPUT TYPE FİLE file apload elementi oluşturmak için kullanılır.
+
+driver.get(""https://www.dfdfdafaf.com");
+-choose file dosyasına basalım
+Webelement chooseFileButton=driver.findElement(By id("njnknjkn"));
+String dosyaYolu=System.getProperty(user.home)+"/Desktop/logo.png";
+chooseFileButton.sendKeys(dosyaYolu);
+--upload butonuna bas.
+driver.findElement(By.id("file-submit")).click();
+1-<input type="file" ----sendKeys methodu
+2-<button type="button">Select Files</button>
+      a)Robot class = seleniumda desktop işlemleri için kullanılır. javadan gelir
+**actionlara benziyor.
+      b)Auto It seleniumda desktop işlemleri kullanılır
+
+önemli***
+unhandleAlertException neden maximize yaparken hata aldık.
+switchto  kullandığımızdan alert kutucuğu maximise yapamadığından hata verir.her driver.get methodunu çağırdımızda maxi yapar.
+driver ı //yoruma almaliyız veya try catch kullanabiliriz.
+
+
+/*****************CUCUMBER*******************************
 
 
 
+////BDD/// behavior driven development//CUCUMBER START
+cucumberin dili gherkin dili
+Feature file
+Feature epic
+Scenario test case
+Given stepler
+And
+Then
+**davranışlar tanımlanır
+**agile methodolijisinde code bilmeyen kişiler olabilir
+**anlaşılabilir ingilizce veya türkçe kullanılır
+**TDD TEST DRİVEN DEVELOPMENT.
+hibrit frame work 
+cucumber ,junit ve testng ile kullanılabilir.ama biz cucumbe-junit kullanıcağız
+cucuber raparu
+extent rapor
+cucumber jbm güzel bir rapor
+reuseable test adımları
+
+
+1-Create project:file-new-prject-select maven-click next
+2-name:ahmetBayram-cucumber
+3-add dependencies=selenium-java,webdrivermaneger-cucumber java-cucumber junit
+4-click maven=click"Enable auto-reload after any changer" bu mesaj görünmeye bilir
+5-javanın sürümü ile alakalı sorunları hal etmek için
+<properties>
+<maven.compiler.source>1.8</maven.compiler.source>
+<maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+6-java sağ tıkla aşagıdaki paketleri oluştur
+a-utilities
+b-pages
+c-runners test caseleri çalıştırmak ve kontrol etmek için kullanacağız
+d-stepdefinitions (kodlarımızı burda oluşturacağız)
+7-projeye sağ tıkla configuration.properties dosyası oluştur
+8-utilities paketi altında Driver ve ConfigReader dosyası oluştur
+9-test paketi altında yeni klasör oluşturalım :resources
+10-resources klasorünün altına yeni bir klasor oluşturalım :features java kodu içermeyen dosyaları buraya  koyacağız
+11-features sağ tıkla yeni dosya oluşturalım:ilkfeaturefile.feature
+12.cucumber plugin i intellij e ekleyelim (settings/plugins)
+a( mac) Intellij Idea->Preference-plugins-marketplace-Type Cucumber for Java-Install-restart
+b (windows) file->setting-plugins-marketplace-Type Cucumber for Java-Install-restart
+
+@Wip work in project
+*adımları manuel test yapar gibi tüm adımları yazılır
+-gherkin language zorunlu .feature uzantlı dosya oluşturmamız lazım.
+given
+when
+then
+and
+TDD VE BDD  JUNİT VE TESTNG KULLANABİLİRİZ
+excelle yaptıgımız herseyi cucumber da var.
 
 
 
