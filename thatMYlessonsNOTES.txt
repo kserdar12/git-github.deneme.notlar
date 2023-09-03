@@ -757,28 +757,73 @@ tekrar eden preconditionlarda ilk adımlar beforemethod gibi ilk tekrar eden"
 
 
 
+-spark report
+*mvn clean verify consoldan run etmek
+*/run classında features yolunun sonuna sadece . class ismi de yazabiliriz
+
+dryrun->false dry run yokmuş gibi hareket et demek runner methoduna eklemez isek aynı fonksiyonu görür
+dryrun->thrue ise => hızlı bir şekilde tüm stepdefinitionsları tara tanımlanmamış stepdefinitionsları bul ve fail ver.
+missing step definitionları kontrol eder zaman kaybının önüne geçer.önce true yapıp kaçak kod var mı bul.tanımla ve sonra dryrun false yap.
 
 
+Parametrizing ff using
+*kodlarımızı parametreli olarak yazdıktan sonra sadece " "  tırnak *** içindeki değeri değiştirerek test datalarını feature filedan  kontrol edebiliriz daha dinamik olacaktır böyle
+**dryrun=true iken test caseler geçerse eksik adımız yok edemektir.cucumber da.
+
+-**************SCENARİO OUTLİNE*************-----------     " <veri>   "
+--aynı senaryoyu farklı değerlerle yapmak için
+
+@scenario_outline_1
+Feature: arama_feature_2
+
+  Background: google_git
+    Given kullanici google gider
 
 
+    Scenario Outline: arama _testi
+
+    When kullanici "<product>" için arama yapar
+    Then sonucların "<product>" içerdiğini dogrula
+    Then close the application
+
+      Examples:
+        |product |
+        | tv |
+        |iphone|
+        | tesla |
+        | cat|
 
 
+  #Scenario->Scenario Outline
+      # " "   ->  "<sutun ismi>"
+      # Example kelimesi Scenario Outline dan sonra kullanilmalı
+
+*birden fazla veri ile test yapmak için
+*feature file kısa hale getirdik
+*birden fazla kullanıcı bilgileriyle sayfaya girmek için
+*birden fazla kullanıcı hesabı oluşturmak için
+*birden fazla ürün aratmak için
+*birden fazla excel dataprovider ı kullanacağımız her herde kullanırız
+
+editor.datatables.net
+
+Scenario Outline DDT DATA DRİVEN TESTİNG İÇİNkullanılır
+yani benzer scenarioyu tekrar tekrar farklı datalarla çalıştırmak için kullanılır
+Scenario Outline Excel ile otomasyok yapmaya benzer tek fark kullanımı daha kolaydır
 
 
+CUCUMBER HTML RAPORLARI
+
+-HTML RAPORU plugin runner  browserdan açmak lazım
+-JSON RAPORU plugin runner  çift tıkla
+-JUNİT RAPORU plugin runner   çift tıkla
+--maven -cucumber-reporting() eklenti 
+-Spark html and pdf raporları Extend rapora benzer () eklenti
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+pretty    bilgilerin okunaklı olması
+monochrome=true consola bilgilerin okunaklı olması
+json = java script kodlarının depolandığı bir dosya tipi xml html gibi
 
 
 
