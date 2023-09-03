@@ -695,29 +695,65 @@ bunun altında yeni directory olarak features folder ı oluşturacağız.bu dosy
 @CucumberOptions( 
         features = "./src/test/resources/features",
          glue="stepdefinitions" ) not features ve step definitions ayni paket altında olduğundan src/test.. ile başlamadık
-
+      tags="@google_search"
+     dryRun=false	
 
 public class Runner {
 
 
 }
 
+**runner classı stepdefination ve features dosyasını baglar ve run eder.
+*1-Feature file dosyası oluştur.ilkfeaturefile.feature
+*2-Runner clasını run et
+*3-console den missing step definitions ları kopyala
+*4-stepdefinitions klasöründe  googlestepdefinition clası oluştur ve consolden kopyaladıklarımız yapıştir  ve import et anotasyonları
+Feature: ilk feature file
+
+  Scenario: iphone_arama
+
+  Given kullanici google gider
+  When kullanici iphone için arama yapar
+  Then sonuclarda iphone oldugunu dogrular- 
+*5-    @Given("kullanici google gider")
+    public void kullanici_google_gider() {
+        Driver.getDriver().get(ConfigReader.getProperty("google_url"));
+    }
+
+    }
+
+not:page sayfsında elementlerin locate lerini yazıyoruz TESTNG GİBİ
+**TANIMLANMAMIŞ ADIM OLURSA TEST FAİL VERECEKTİR.featuresları yazarken boşluk karakter harf herşeye dikkat etmek lazım
+**testler codlar feature file deki sıralamaya göre çalışır.step definitions na göre değil
+**then when hepsi aynı olsa fark etmez önemli olan parantez içinin aynı olması gherken kısmi
+
+-When,Then, And,Given,Rule,Example,Background,Scenario Outline,Examples ->gherken dili
+** """ doc String
+**  | data Tables-@Tag-#comments
+
+*****daha önce tanımladığımız step defination ve test adımlarını cucumber tekrardan yazılmaz.izin vermez.
+**page altında her hangi bir yerde olması tanımlanmış olması yeterli
+
+**Tag can be placed above the follovin Gherkin elements
+Feature
+Scenario
+Scenario Outline
+Example
+
+ @tesla #sadece bu senaryo çalışacak bu olmasaydı ki tüm senoryalar çalışacaktı
+  Scenario: TC02_google_tesla_arama
+
+örnek:
+@CucumberOptions(
+        features = "./src/test/resources/features",
+         glue="stepdefinitions" ,
+         tags = "@tesla"
+                          )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+****Background 
+tekrar eden preconditionlarda ilk adımlar beforemethod gibi ilk tekrar eden"
+**herbir Scenario kelimesinden önce bir tek sefer çalışır.
 
 
 
