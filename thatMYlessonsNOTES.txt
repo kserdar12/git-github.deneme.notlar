@@ -826,10 +826,84 @@ monochrome=true consola bilgilerin okunaklı olması
 json = java script kodlarının depolandığı bir dosya tipi xml html gibi
 
 
+*****DATATABLE İN CUCUMBER***********
+*Scenario Outline gibi. example gerek yok.data verilerimi test in her yerinde kullanabiliriz her adım da.
+*.feature file scenario daki gibi fakat stepdefinitions clasında 3 farklı yol izleyebiliriz.data table hem konu adı hem data tipi olarak kullanılıyor cucumberd a
+datatables ları scenario outline ve scenario ile birlikte kkullanabiliriz.
+
+  @When("kullanici emaili ve sifresini girer")
+    public void kullanici_emaili_ve_sifresini_girer(io.cucumber.datatable.DataTable dataTable) {
+       //1.List<String>olarak dataları depolaya biliriz.sendKeys methodu string kabul ediyor.verileri string eçevirmeklazım
+    }
+
+
+**Scenario Outline ile DDT Yapılır.
+test admlarını data reusable yapmak için kullanılır
+encok kullanılan cucumber özelliklerindendir
+Example kelimesi veri girişi için kullanılır
+stepdefinitionsların data tipi STRİNG TİR
+Examples lar stepdefinationslarda en sonda kullanılır
+
+
+Data table ile DDT yapılabilir
+Test adımlarını reusable yapmak için kullanılır
+scenario outline kadar yaygın değildir
+Examples kelimesi kullanılmaz
+Step definitionslardaki data tipi DATATABLE stır.
+data tableslar ara adımlarda kullanıla bilir.
+
+
+not:datatables ve Scenario Outline birlikte kullanılabilir
+
+**//COLLECTİONS NEDİR NASIL KULLANDIN?
+list,set,queue veri depolamak için interface tir bunlar.
+framworkte nasıl kullandık.
+1-collectionsları özellikle çoklu data ihtiyacımız olduğunda kullanırız örneğin findElements kullanıldığında
+birden fazla eleman element beklediğim için List<Webelement> kullanırız.
+**yada çoklu pencere geçişlerinde getWindowHandles ile Set kullanırız
+**Dropdowndaki tüm elementleri getOptions metor ile aldığımda List<Webelement>
+**Frame workumda bazı utilty çok sayıda collections Kullanıyoruz EXCELLutils datalarını list e koyan methodlarıımız var
+**cucumberda DataTable kullanıdığımız List veya Map koyabiliriz.
+*maplar collection değildir.kendine has özellikleri var.
+
+HOOKS NEDİR NASIL KULLANILIR
+test base benzer j ıunit before ve after methodu koyuyorduk.driver veya close koyuyorduk
+*herbir scenario ve scenario Outline dan önce ve sonra çalışır.
+@after ve @befere bunladar j unitten değil cucumberdan geliyor.
+steplerden önce değill dikkatttt. 
+conditional hooks olabiliyor
+--close --screenshot-
+
+@After
+public void tearDown(Scenario scenario){
+            final byte[] screenshot=((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+	
+	if(scenario.isFailed()){
+		scenario.attach(screenshot,"image/png" , "screenshot");
+
+	Driver.close.Driver();
+	}
+	}
+
+
+hooks classörünü definitions page nın altına açabiliriz fakat her run ettiğimiz de çalışacaği için bu tercih etmiyoruz
+java package nın altına yeni bir hook package açıyoruz.
+
+
+  @After
+    public void tearDownScenarios(Scenario scenario) {
+        //eger bir senaryo kalısa ekran görüntüsünü al ve rapora ekle
+        if (scenario.isFailed()) {
+            final byte[] failedScreenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(failedScreenshot, "image/png", "failedScenario" + scenario.getName());
+        }
+    }
 
 
 
-
+glue="stepdefinitions" tek çalıştırır  fakat yeni bir paket eklemek için 
+glue={"stepdefinitions" , "hooks"} yazmalıyız 
+taglerde de aynı
 
 
 
