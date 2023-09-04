@@ -906,6 +906,37 @@ glue={"stepdefinitions" , "hooks"} yazmalıyız
 taglerde de aynı
 
 
+CUCUMBER RAPORLARINI CLOUD A EKLEME
+1-resources dosyasının altında cucumber properties dosyası oluştur.cucumber.properties
+2 şu kodu ekle  : cucumber.publish.enable=true
+3 test çalıştır bu şekilde html raporu cloud yuklenecektir. fakat GitHub ile giriş yapılmaz ise 24 saat içinde silinecektir.bu yüzden github dan girelim
+4 Login with github a tıkla Authorize SmartBear
+5 creat collection
+6 tokeni cucumber.properties e ekle
+7 testi çalıştır Collections klasöründe raporlar oluşacaktır
 
+birden fazla collection oluşturabiliriz.rapora özel dosya.
+cloud da bu rapor editlenebilir.paylaşabiliriz
+https://reports.cucumber.io/
+───────────────────────────────────────────────────────────────────────────────────┐
+│ Share your Cucumber Report with your team at https://reports.cucumber.io          │
+│ Activate publishing with one of the following:                                    │
+│                                                                                   │
+│ src/test/resources/cucumber.properties:          cucumber.publish.enabled=true    │
+│ src/test/resources/junit-platform.properties:    cucumber.publish.enabled=true    │
+│ Environment variable:                            CUCUMBER_PUBLISH_ENABLED=true    │
+│ JUnit:                                           @CucumberOptions(publish = true) │
+│                                                                                   │
+│ More information at https://cucumber.io/docs/cucumber/environment-variables/      │
+│                                                                                   │
+│ Disable this message with one of the following:                                   │
+│                                                                                   │
+│ src/test/resources/cucumber.properties:          cucumber.publish.quiet=true      │
+│ src/test/resources/junit-platform.properties:    cucumber.publish.quiet=true  
+
+feature filelere birden fazla @tag atayabiliriz.  @smoke test @regression test
+
+
+EXCEL AUTOMATİON İN CUCUMBER
 
 
