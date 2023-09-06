@@ -937,6 +937,124 @@ https://reports.cucumber.io/
 feature filelere birden fazla @tag atayabiliriz.  @smoke test @regression test
 
 
-EXCEL AUTOMATİON İN CUCUMBER
+EXCEL AUTOMATİON İN CUCUMBER testng mantığı ile aynı yapılır.
+
+**************RERUN PLUGİNG******************************
+testng de listenerları kullanmıştık 
+kalan test olursa bir raporla oluşur.Rerun plugin bu  işi sağlar
+****"rerun:target.failedRerun.txt" bu file içinde kalan scenariolar olacak.
+-tüm test caselerin geçmesi durumunda txt dosyasında scenario bulunmaz.
+
+target/her seferinde test run da yeniden oluşacağı için screenshotları ve raporları oraya koymaz isek daha iyi olur.
+
+PARALEL TESTİNG
+-aynı anda birden fazla browser da test caseleri çalıştırma.
+thread:kod kod dizi 3
+tread safe: aynı anda bir den fazla testi çalıştırma kodlar karışmaz
+
+paralel test yöntleri
+cucumbe                       frame workte ayarla yapılır
+testng                            frame workte ayarla yapılır
+selenium grid
+Jenkins
+
+sauce Labs                                   ücretli
+Browser Stack                         ücretli
+
+1-*pom.xml le plugin eklememiz lazım
+**Sure plugin  cucumbera paralel test yapma özelliği getiriyor
+** Failsafe plagin     herhangi bir testtin fail etmesi durumunda diger testlerin çalışmasını sağlar.
+
+2-sonra birden fazla Runners oluşturup bu runnerları aynı ANDA MAVEN COMMEND ile çalıştırarak paralel test yapılır
+3-terminalden maven projesini çalıştırmak için mvn clean verify kullanılacak
+4-report of plugin ekle. yani 3 plugin ekle cucumber-report
+-**daha sonra 3 adet paralel test için runtest classı kurduk cucumber frame workunde.hooks dosylarını sildik sıkıntı çıkarıyor.
+
+**dependency :clasları ve methodlarını verir büyük APİ BUNDALAR tool.dosyalar
+plugins:daha sınırlı özellikler getirir.örneğin rerun pluging,cucumber plugins,xml file,json plugin.dependecylere benziyor ama daha kısıtlı.aksesuar gibi
+
+**burda yazılan test taglerinden en az bir tane featureslarda kullanılmak zorunda .aksi takdir de çalışmaz.
+
+*=yıldız contains eğer bir kelime *serdar  any anlamında serdar kelimesini içeriyor sa al. /. öncesi dahil
+--pluginsler
+ <build>
+ <plugins></plugins>
+ </build> yapısında eklenir.
+
+**terminal*Power Shell/CMD kullanarak maven kodu ile testleri çalıştır.
+mvn clean verify
+mvn clean install
+
+**bu işlemler için en başta bilgisayara apache-maven kurmak lazım
+1-apache-maven google a yaz. dowload -versionlardan 2.seç- indir .winzip olarak gelecek.dosyaya çevir ve program files dosyasına ekle.  .bin gir ve adresi kopyala
+2-edit enviroment ta gir . path tıkla new ve yapıştır.
+3sonra cmd den mvn -v enter
+**calışacak testlerin ismini daha doğrusu içerigini plugin in içinde belirtiyoruz ve runner da tag adlarını ona göre koyuyoruz.
+-paralel testler maven lifeclic dan çalıştırılabilir.
+
+
+***********************************Spark Report*************************
+
+extend reportun kardeşi.
+maven clean verify a gerek kalmayacak.
+kuruulumm
+
+1-resources klasoründe extent-config.xml dosya  burda da rapora yardımcı şeyler tanımlanır thema protokol başlık https veya http
+2-resources klasöründe extend.properties  ***bu iki dosya birbiriyle uyum içinde çalışacak  asıl raporu bu yapar
+3-Spark report dependency pom a ekle  :https:mvnreporsitory.com/artifact/tech.grasshopper/extentreports-cucumber7-adapter/1.6.0
+4-spark report plugini Runner a ekle
+"com.aventstack.extentreportscucumber.adapter.ExtentCucumberAdapter:"
+
+
+
+
+#SCREENSHOT PATH
+screenshot.dir=test-output/
+screenshot.rel.path=../                  relative path test out put dosyasını bul nerede olursa olsun
+
+adapter dependency gibi cucumber4 kullanacağız
+
+html raporunda ekran görüntüleri büyüyor.pdf te olmuyor
+
+
+cucumberda raporlama
+1-runers da cucumber plugin Html,json,xml
+2-extent spark report
+dependency
+configurasyon dosyaları
+3-maven clean verify html raporları consoldan
+ekran görüntüleri raporlara nasıl eklenir
+hooks classta @After metotunun içinde kod ile
+ayrıca oluşturulan bir steple Then ekran görüntüsü al ile olabilir
+**test case fail ettiğinde ne yapılır
+
+Framework Tipleri
+-**Data Driven
+çok sayıda data ile test edilir.excell data,database data,xml data,scenario outline veya datatable dan data kullanarak yapabiliriz
+**-Keyword Driven
+excel işin merkezinde dir.-test step-test object:web page object/element,username,password
+action:such a click ,open browser,input 
+test data
+--**Hybrid Framework
+BDD+DDD   Data driven test +behavior driven test
+--**BDD Framework
+önce behavior(fonksiyon,özellik,davranış)tanımlanır sonra kod yazılır cucumber gibi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
