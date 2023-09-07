@@ -1093,13 +1093,43 @@ PACTH : partially update
 
 CRUD operations 
 
-2-HEADER :data hakkında bilgiler meta data başlık bilgileri
+2-HEADER :data hakkında bilgiler meta data başlık bilgileri.
 3-path(yol) Endpoint/url/uri
 requestler işlemin gerçekleşeceği bir kaynağa giden yolu içermelidir.
 endpoint :www.fashionboutique.com/customers
 
 
+endpointlerin bulunduğu sayfaya swager dökümanı denir.bu sayfalar bir uygulama değil yol haritası tester için API testi için
+sayfasın basında base url vardır.üzerine  dökümandaki kodları yazıp işlemleri yaparız.
 
+get request->> swager dokumadan workspace-getnew request-> send
+post request-->> swagger dok. oku->post/pet/body
 
+run collection
+bekleme süresi ,hergün aynı saatee istediğim kadar çalıştırabiliriz postman den
+
+-oluştur oku update et sil run collectionları kkullan. test claslarını ekle.wiev. collectionları masaüstüne alabiliriz veya export edebilirim.masa  üstündeki workspace leri direk postmana atabiliriz.
+olmayan bir şeyi silmeye çallıştığnda fail verir 404 verir
+
+**rest assured dependenci yi ekle
+main methodta given() ile başlıyoruz.get() methoduyla içine endpoint koyarak tabiki request yapıyoruz cevabı Response interface veriyor.
+gelen response direk yazdırdak hash kodunu verir. prettyprint olarak yazdır
+
+--otomasyon kodları yazmı için şu adımları izlemek gerekir
+a)gereksimlerianlama
+b)Test case yazımı
+test case yazmak için Gherken language kullanılır
+1-Given: ön koşullar --->endPoint ,Body...
+2-When :  yapılacak işlemler -->get put delete ....
+3-Then :assertion close
+4-And : art arda kullanılan aynı işlemeler için
+
+otomasyon kodları yazma
+-<<set the url   ENDPOİNT i kur
+--<<set the expected data---beklenen veriyi kur
+--<< send the request and get the response
+--<< do assertion  doğrulama yap
+
+get requestten sonra gelen response tan response. date, haders,time,status code ,content type
 
 
