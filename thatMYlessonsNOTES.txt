@@ -1041,17 +1041,62 @@ BDD+DDD   Data driven test +behavior driven test
 önce behavior(fonksiyon,özellik,davranış)tanımlanır sonra kod yazılır cucumber gibi
 
 
+*****************API**********************************
+request---->respond
+API testi ,uygulaması görümün üzerine odaklanmaz.
+
+örnegin cucumber frame work umuzde hem api hem data base testi, hemde ui testi yapabiliriz
+1-user interface ile create /update/delete sonrası / API ile create update delete yapıp UI,API,DATABASE TESTİ YAPABİLİRİZ/ DATABASE DE SQL kullanarak veri oluşturulabilir./insert into/update/
+*uı arama işsevselliğini kullanra verilerin data base olup olmadığını test edebiliriz
+*API request kullanarak verilerin database de olup olmadığını kontrol edebiliriz RESTASURE LİBRARY JSON DATA KULLANIRIZ
+*SQL select queru kullanarak verilerin database de olup olmadığını kontrol edabilir.JDBC SQL
+
+API VE WEBS SERVİSLERİ ARASINDAKİ FARK
+web serviceler internet varsa yoksa apı .
+HTTP hyper text tranfer protocol 
+
+1-her apı testleri ile http status codes larını doğrulayacağız
+2-data veri doğruluğu
+
+HTTP STATUS CODLARI
+
+200  Başarılı HTTP istekleri için standar yanıtıdır
+201 bir ögenin başarı ile oluşturulduğunu belirtir
+204 içerik yok.gövdesinde hiçbir şeyin döndurülmediği başarı kodu
+400 bad request hatalı sözdizimi aşırı boyut veya başka bir işlemci hatası nedeniyle istek işlenemiyor
+403 yasak istemcinin kaynağa erişimi yok
+404 bulunamadı kaynak şu anda bulunamadı.silinmiş veay henüz mevcut değil
+500 dahili sunucu hatası
+
+testi manuel yapıyorsak POSTMAN
+otomasyon için SOAP UI xml temellidir.platformlardan bağımsızdır. farklı teknolojiler ve programlama dilleri ile farklı işletim sistemlerinde çalışan uygulamar arasında iletişim kutmak için bir yol veya biçim sağlar
+soap bilgileri xml formatında kayıt eder  APİ   java->xml->phton bu sırayı takip eder dilleri çevirir.
+*Rest/Rest Ful kullanacağız biz.
+otomasyon yazmadan önce postmande manuel test yapacağız.
+*elinizde endpoint i varsa manuel test yapabilirsiniz.
+
+Repretentional State Transfer
+
+<customer>                                                         						{
+     <customer_ıd>1001<customer_id>							"customer_id:101,
+     <customer_name>1001<customer_name>						"customer_name: "Mark Star"
+										} 	JSON FORMAT(KEY Value)
+</customer>  XML format
 
 
+1-
+GET : ready-only
+POST : creat
+PUT : update
+DELETE :clean
+PACTH : partially update              
 
+CRUD operations 
 
-
-
-
-
-
-
-
+2-HEADER :data hakkında bilgiler meta data başlık bilgileri
+3-path(yol) Endpoint/url/uri
+requestler işlemin gerçekleşeceği bir kaynağa giden yolu içermelidir.
+endpoint :www.fashionboutique.com/customers
 
 
 
