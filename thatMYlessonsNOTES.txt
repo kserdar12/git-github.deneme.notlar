@@ -1177,9 +1177,31 @@ response.asString() te yaptığımız gibi ama jsonpath daha çok manipule imkan
  //soft assertion yapmak için test ng dependencies i kullanmak lazım junite soft assertion yapamıyoruz
 jsonpath kullanıyoruz bunda
 
+//GROOVY LANGUAGE /////////
+
+ÇOKLU gelen json dataların içinden quary params gibi veri süzmeye yarar.
+assertion kısmını dinamik yapmak için datalarımızı set the expected data kısmında hazırlamamız gerekebilir.bu kısmı genelde put ve posta kullanacağız
+jsonPath te gelen dataları list olarakta alabiliriz. string int vb
+JsonPath datalarını liste koyup path belirtmez isek tüm dataları list olarak verir
+object türündeki bir sayıyı int bir sayıyla toplayamayız.bunun için explict narrowing yani type casting yapmamız lazım
+
+ List<Object> list= jsonPath.getList("findAll{it.id>190}.id");//bana tüm id leri list halinde verecek
+        
+        //groovy language }.koyup ne istiyorsam onu larız findAll{it.id>190}.id-findAll{it.id>190}.title gibi
+
+java temelli bir programla dildir.jsonPath de eleme yapar groovy
 
 
+///////put request code in otomation**************
+bizleri bir endPoint bir de body lazım bu yüzden given kısmında bunlar verilir
+payload gönderilecek data. expected datamız string dönüşturülebilir ama tavsiye edilmez.
 
+payload map olarak aldığımız da dönüştürücü eklememiz lazim  .Gson,Johnzon, Yasson, Jackson(databind) maven reporstory den 
+java objesi olan map jsona dönüştürüldü gson yardımı ile.
+ Map<String,Object>actualData=response.as(HashMap.class);//Gson kullanarak json datayı map e çevirdik
+Gson sayıları double olarak getiriyor dikkat et bunun için json dependencies ekliyoruz
+
+put reqest  post ile aynı adımları izliyoruz. serilization ve de-serilizationları unut ma. gönderdiğimiz ve aldığımız dataları map ile gönderiyoruz.
 
 
 
