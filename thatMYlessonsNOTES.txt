@@ -1127,9 +1127,60 @@ test case yazmak için Gherken language kullanılır
 otomasyon kodları yazma
 -<<set the url   ENDPOİNT i kur
 --<<set the expected data---beklenen veriyi kur
+
 --<< send the request and get the response
 --<< do assertion  doğrulama yap
 
 get requestten sonra gelen response tan response. date, haders,time,status code ,content type
+
+1set the url
+2 set the expected data
+3 send the request and get the response
+4-do asssertion then() methodu ile header kısmının tamamını assert edebiliriz.
+
+proje dilii ile iligi sıkıntı olursa pom xml le 
+<argLine>-Duser.language=en</argLine> eklenmeli
+*body içinde bir veriyi assert edersek gelen responseu asString methoduyla stringe çevirip contains methoduyla işlem yapabiliriz
+//to string kullanmadık asString kullanmaliyız
+
+body i string e çevirip assert ediyoruz.
+200 gibi seyleri then ile yapıyoruz
+
+bady için hamcrest matcher -core matcher dan methodlar ile doğrulayacağız EqualTo gibi.
+
+
+        //tek body() methodu içinde çoklu assertion yaprak soft assertion yapabiliriz.tüm fail durumları hakkında bilgi alabiririz
+        //çoklu body methodları ile hard assertion yapmış oluruz ilk fail da çalışma durur sonra ki kodlar çalışmaz
+
+request specification base_urls her request te tekrarlan ne var ise buraya koyacağız
+base_urls altında yeni bir class açıyoruz. test classına extends edeceğimiz.
+bu classta ResquestSpecification interface sinden spec objensi oluşturuyoruz. new RequestSpecBuilder constructer ın kullanıyoruz.sonra bunu @Before classta assing ediyoruz build yapmayı unutmuyoruz.
+base url üstüne ekleyeceğimiz kısımları param veya params ile ekliyoruz
+.her apı için ayrı bir class açılacak reuseable method oldu
+
+body içinden userId çağırdığımda ilk örnekte bir adet var mı ama şimd birden fazla var bunun için assert methodları değişecek dikkat
+content type genellikle veri girerken kullanacağız.given den sonra ekleyeceğiz
+
+ //hasSize()=eleman sayısını assert eder
+    //hasItem()=contains methodu gibi bir objenin içerilip içerilmediğini assert eder_import static org.hamcrest.CoreMatcher
+    //hasItems()s=containsAll gibi birden fazla objenin içerilip içerilmediğini assert eder
+
+https://google.com/search?q=techpro&faf               soru işareti le quary parametresi and iile birbirine bağlarız önemli
+
+//  response.then().statusCode(200).body("bookingid",hasSize(greaterThan(0)));
+ assertTrue( response.asString().contains("bookingid"));
+
+**//aldığımıs response u jsonPath objesine  çevirip içinde ki tüm elemanlar üzerinde manipülasyon yapabiliriz
+JsonPath jsonpath=response.jsonPath()
+response.asString() te yaptığımız gibi ama jsonpath daha çok manipule imkanı tanır bizlere
+
+ //soft assertion yapmak için test ng dependencies i kullanmak lazım junite soft assertion yapamıyoruz
+jsonpath kullanıyoruz bunda
+
+
+
+
+
+
 
 
