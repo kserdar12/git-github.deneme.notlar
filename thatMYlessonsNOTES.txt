@@ -1227,8 +1227,15 @@ bunun için ((Map)obj).get("abc"); olmalı
 maplerde value değerini Object yaptığımız da aynı şey olur .data tipi object ise implicity narrowing yapmaliıyız type casting
 **object kullanırasan type castingleri unutma
 
+**method parametrelerinden birini koymayacak isek ana methoda if ile çözebiliriz null değil ise diyerek
+gelen datalar için map yapmamıza gerek yok çünkü de serilization bizim için yapar gson dependency
+maplerde hergelen value obje olarak gelecek bu yüzden type castin yap. örnegin sub string de yapabilirz.
+//put tüm datayı değiştirir eksik gönderiri sek siler.
 
-
+//patch kısmı updata yapar
+mevcut methodlarımızda patch için   if null kısımlarını kullandık unutma çünkü bütün dataları girmeyeceğiz
+int data null ataya mıyoruz wraper class kullanmak gerekir
+object  class ta  equalsTo diye bir method var 
 
 
 
