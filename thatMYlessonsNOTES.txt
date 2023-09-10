@@ -1203,6 +1203,50 @@ Gson sayıları double olarak getiriyor dikkat et bunun için json dependencies 
 
 put reqest  post ile aynı adımları izliyoruz. serilization ve de-serilizationları unut ma. gönderdiğimiz ve aldığımız dataları map ile gönderiyoruz.
 
+endpointlerimizi otomasyona dökmeden postman de manuael test yapıyoruz
+serialization gson jackson java json a çeviriyor
+
+deserialization json data java döndürüyor
+
+**///////
+response.body(path,Hamcrest Matchers(hasItem(),....))  ->datayı dışarı alıp kullanamııyoruz.sadece karşılaştırma yapıyoruz
+response.jsonPath().getList()/getString()         ->datayı dışarı alabiliyoruz.kullanabiliyoruz manipule edebiliyoruz
+response.jsonPath().getList()/getString()
+response.as(HashMap.class)->Gson
+response.as(Pojo.class)
+			Response.asString
+ObjectMapper().readValue(String data,HashMap.class)
+ObjectMapper().readValue(String data,Pojo.class)
+///////***********
+
+***  Object obj=new HashMap<String ,String>();
+     obj.get()--->yapamıyoruz parent child ın methodlarına sahip değil castin yapmaliyız dikkat
+
+bunun için ((Map)obj).get("abc"); olmalı
+
+maplerde value değerini Object yaptığımız da aynı şey olur .data tipi object ise implicity narrowing yapmaliıyız type casting
+**object kullanırasan type castingleri unutma
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
