@@ -1237,11 +1237,24 @@ mevcut methodlarımızda patch için   if null kısımlarını kullandık unutma
 int data null ataya mıyoruz wraper class kullanmak gerekir
 object  class ta  equalsTo diye bir method var 
 
+APİ=     PROJECT İNTERFACE
+//////////////////////POJO CLASS   payload oluşturma///////////////////////////////////
+PLAİN OLD JAVA OBJECT
+class bir kalıp * ***her class bir data tipidir aynı zamanda
+**bir classtaki variablelara obje oluşturunca yeni değerler atayabiliriz.bir classtan variable private olmalı constructerlar oluşturmalıyız. bir boş constructer oluşturmalıyız bazı değerler null olacağı için
+**her variable key value değeri  olarak alacağız.
+**inner değerler için map mantığıyla yeni bir pojo clası yapacağız
+**defoult const. de serilization hata alırız dikkat
+--her clasın görünmeyen bir const. vardır.
+***costructer parametreli yapmamızın sebebi direk obje oluştururken değer atamak için.ayrıca bir obje oluşturulabilir objenin değerlerini setter lar ile ataya biliriz.
+tostring methodu over ride yaptığı için objeyi sout içine koyayrak yazdıra bilirim**
+**expected data mın data tipi her ne ise gelen response u ona çevirmem lazım
+**jackson.databind.exc.UnrecognizedPropertyException: alabiliriz çünkü pojo clasında olmayan değer response olarak geldi tanınmayanları ignore et.
+@JsonIgnoreProperties(ignoreUnknown = true) pojo clasının başına koy.
 
-
-
-
-
+///groovy//
+list json döndüğünde groowy aklımıza gelsin.
+gelen data pojo class veya map ile işlem yapılamayak gibi ise klasik yöntemle yap 
 
 
 
