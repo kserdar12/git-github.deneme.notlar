@@ -1292,6 +1292,35 @@ gelen data pojo class veya map ile işlem yapılamayak gibi ise klasik yöntemle
 //yukaridaki post islemini yaptığımızda gelen response u pojo.class olarak çevirdiğimizde 3 pojo yapmamız lazım.gelen cevap id ve booking i ignore edersek alt kısımdaki pojo verileri null gelir.
 
 
+//////////////OBJECT MAPPER/////////////////////////
+***as.()  ile yaptığımız işi bu sefer ObjectMapper ile yapacağız.pojo clasa veya map e çeviriyoruz
+
+ Map<String,Object>actualData = new ObjectMapper().readValue(response.asString(), HashMap.class); objectmapper objesinde readValue methodunu kullanıp gelen json datayı map e çevirdik burda
+
+/objectMapper kullanarak response ı java objesine çeviriyoruz
+        //readValu methodu ilk parametresi String 2. parametreye çevrilecek data tipi gelir
+
+  public static <T> T convertJsonToJava(String json,Class<T>cls){//GENERİC METHOD
+
+        try {
+       return      new ObjectMapper().readValue(json, cls);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
+as() methoduyla sadece response çevirebiliriz.ama ObjectMapper ile expected datayı da istediğimiz data tipine çevirebiliriz
+//set the expected data
+        //ObjectMapper objesinden readValue methodu kullanak expected datayı oluşturabiliriz.
+        //json datay " " aradına aldık mı string olur
+
+
+
+
+
+
+
+
+
 
 
 
