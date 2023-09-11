@@ -1256,9 +1256,40 @@ tostring methodu over ride yaptığı için objeyi sout içine koyayrak yazdıra
 list json döndüğünde groowy aklımıza gelsin.
 gelen data pojo class veya map ile işlem yapılamayak gibi ise klasik yöntemle yap 
 
+   Given
+          1)  https://restful-booker.herokuapp.com/booking
+          2)   {
+                "firstname": "Ali",
+                "lastname": "Can",
+                "totalprice": 999,
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2021-09-21",
+                    "checkout": "2021-12-21"
+                 },
+                 "additionalneeds": "Breakfast"
+             }
+        When
+          I send POST Request to the URL
+       Then
+          Status code is 200
+      And
+          Response body is like {
+                                  "bookingid": 16,
+                                  "booking" :{
+                                        "firstname": "Ali",
+                                        "lastname": "Can",
+                                        "totalprice": 999,
+                                        "depositpaid": true,
+                                        "bookingdates": {
+                                            "checkin": "2021-09-21",
+                                            "checkout": "2021-12-21"
+                                        },
+                                        "additionalneeds": "Breakfast"
+                                     }
+                                  }
 
-
-
+//yukaridaki post islemini yaptığımızda gelen response u pojo.class olarak çevirdiğimizde 3 pojo yapmamız lazım.gelen cevap id ve booking i ignore edersek alt kısımdaki pojo verileri null gelir.
 
 
 
