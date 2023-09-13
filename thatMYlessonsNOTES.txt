@@ -1325,8 +1325,12 @@ token oluşturmaktan sa outhorization kısmına token üretmek için istenilen b
 package tan smoke testleri çalıştıra biliriz.fakat natural order olarak çalışacağı için bizim istediğimiz şeyler olmayabilir bu yüzden
 bir runner class oluşturuyoruz.paketin içine
 
+spec ten sonra addHeader eklemiz lazım token eklemek için
 
-
+pojo clastaki variablara assing yapmaz isek bizim objemiz içinde hepsi olur ama null olarak gelir.
+bu yüzden partial yani patch yaptığımızda kaç variable değiştireceksek o kadar variable bir pojo hazırlamamız lazım
+ama en iyisi böyle kismi işlerde map ile çalışmaktır.
+**boolean ve int null atanamaz bu yüzden wraper yapmamız lazım
 
 
 
