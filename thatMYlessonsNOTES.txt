@@ -1314,6 +1314,17 @@ as() methoduyla sadece response çevirebiliriz.ama ObjectMapper ile expected dat
         //json datay " " aradına aldık mı string olur
 
 
+****authorization yetki
+****otantification  kimlik belirtmek
+method not allow diyorsa data silinmiş olabilir id yeniden alabiliriz postman
+created silindi delete mesajıdır.
+forbidden token istiyor demektir
+
+token oluşturmaktan sa outhorization kısmına token üretmek için istenilen bilgileri girelim
+
+package tan smoke testleri çalıştıra biliriz.fakat natural order olarak çalışacağı için bizim istediğimiz şeyler olmayabilir bu yüzden
+bir runner class oluşturuyoruz.paketin içine
+
 
 
 
